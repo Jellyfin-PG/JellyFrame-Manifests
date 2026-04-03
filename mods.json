@@ -308,5 +308,135 @@
     "requires": [],
     "preconnect": [],
     "vars": []
+  },
+  {
+    "id": "rating-badges",
+    "name": "Rating Badges",
+    "author": "grimmdev",
+    "description": "Rating badges for imdb, and rotten tomatoes.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "badges",
+      "ratings"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/RatingBadges/thumbnail.png",
+    "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/RatingBadges",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/RatingBadges/RatingBadges.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "new-arrivals-badge",
+    "name": "New Arrivals Badge",
+    "author": "grimmdev",
+    "description": "A custom badge for items to jellyfin, that shows newly added items.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "badges"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/NewArrivals/thumbnail.png",
+    "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/NewArrivals",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/NewArrivals/NewArrivals.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "hover-details",
+    "name": "Hover Details",
+    "author": "grimmdev",
+    "description": "A popup on hover for movie/show/episode details.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "popup"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/HoverDetails/thumbnail.png",
+    "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/HoverDetails",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/HoverDetails/HoverDetails.min.js",
+    "serverJs": "",
+    "permissions": [
+      "jellyfin.read"
+    ],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "screenshot-button",
+    "name": "Video Screenshot",
+    "author": "grimmdev",
+    "description": "Adds a screenshot button to the video player, Supports single capture and auto-screenshot mode at a configurable interval.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "player",
+      "video"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/Screenshot/thumbnail.png",
+    "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/Screenshot",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/Screenshot/Screenshot.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "360-vr-player",
+    "name": "360 VR Player",
+    "author": "Mix1C",
+    "description": "A custom 360 degree video player.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "vr",
+      "ui",
+      "player",
+      "video"
+    ],
+    "previewUrl": "https://i.imgur.com/jNiUciN.png",
+    "sourceUrl": "https://github.com/Mix1C/Jellyfin-360VR-Player",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Mix1C/Jellyfin-360VR-Player@main/jellyfin-vr.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "3d-movie-posters",
+    "name": "3D Movie Posters",
+    "author": "grimmdev",
+    "description": "3d movie posters that rotate with your mouse.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/3DMoviePosters/thumbnail.png",
+    "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/3DMoviePosters",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/3DMoviePosters/3DMoviePosters.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
   }
 ]
