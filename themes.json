@@ -68,14 +68,14 @@
     ],
     "addons": [
       {
-        "id": "blur-addon",
+        "id": "jellyslate-blur-addon",
         "name": "Frosted Glass",
         "description": "Backdrop blur on the navigation drawer, header, and all dialogs.",
         "cssUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@refs/heads/main/examples/jellyslate-addon-blur.css",
         "triggerVar": "ENABLE_BLUR"
       },
       {
-        "id": "rounded-addon",
+        "id": "jellyslate-rounded-addon",
         "name": "Extra Rounded",
         "description": "Stronger corner rounding on the sidebar, header, dialogs, inputs, and buttons.",
         "cssUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@refs/heads/main/examples/jellyslate-addon-rounded.css",
@@ -104,19 +104,19 @@
     "vars": [],
     "addons": [
       {
-        "id": "floating-header",
+        "id": "betterui-floating-header",
         "name": "Floating Header",
         "description": "Makes the header float over content.",
         "cssUrl": "https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/Floating-header.css"
       },
       {
-        "id": "high-contrast",
+        "id": "betterui-high-contrast",
         "name": "High Contrast Interface",
         "description": "Increases contrast throughout the UI.",
         "cssUrl": "https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/High-contrast-interface.css"
       },
       {
-        "id": "scale-hover",
+        "id": "betterui-scale-hover",
         "name": "Scale Animation on Hover",
         "description": "Adds a scale-up animation to media cards on hover.",
         "cssUrl": "https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/Scale-up-animation-on-hover-card.css"
