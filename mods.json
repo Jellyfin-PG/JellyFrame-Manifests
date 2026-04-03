@@ -4,7 +4,7 @@
     "name": "Home App Layout",
     "author": "grimmdev",
     "description": "A layout framework for home page app/cards.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "jellyfin": "10.10+",
     "tags": [
       "home",
