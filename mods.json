@@ -263,5 +263,28 @@
     "requires": [],
     "preconnect": [],
     "vars": []
+  },
+  {
+    "id": "random-movie",
+    "name": "Random Movie",
+    "author": "grimmdev",
+    "description": "Roll the dice and pick a random movie.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "movies"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/RandomMovie/thumbnail.png",
+    "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/RandomMovie",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/RandomMovie/RandomMovie.min.js",
+    "serverJs": "",
+    "permissions": [
+      "jellyfin.read"
+    ],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
   }
 ]
