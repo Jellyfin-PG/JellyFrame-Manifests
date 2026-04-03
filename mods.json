@@ -133,5 +133,65 @@
         "default": "rgba(0,0,0,0.85)"
       }
     ]
+  },
+  {
+    "id": "media-request",
+    "name": "Media Request",
+    "author": "grimmdev",
+    "description": "Adds a Request Media button to the left-hand navigation menu. Users can submit requests for movies, TV shows, music, or any configured media type. Requests are stored server-side and optionally forwarded to a webhook (Discord, Slack, custom).",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "ui",
+      "requests",
+      "community"
+    ],
+    "previewUrl": "",
+    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame",
+    "cssUrl": null,
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@main/examples/media-request-client.js",
+    "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@main/examples/media-request-server.js",
+    "permissions": [
+      "store",
+      "webhooks"
+    ],
+    "requires": [],
+    "vars": [
+      {
+        "key": "MENU_LABEL",
+        "name": "Menu Button Label",
+        "description": "Text shown on the navigation menu button.",
+        "type": "text",
+        "default": "Request Media"
+      },
+      {
+        "key": "ACCENT_COLOR",
+        "name": "Accent Color",
+        "description": "Color used for the submit button and input focus ring.",
+        "type": "color",
+        "default": "#00a4dc"
+      },
+      {
+        "key": "ALLOW_TYPES",
+        "name": "Media Types",
+        "description": "Comma-separated list of request types shown in the dropdown. e.g. Movie, TV Show, Music, Anime, Other",
+        "type": "text",
+        "default": "Movie, TV Show, Music, Anime, Other"
+      },
+      {
+        "key": "WEBHOOK_URL",
+        "name": "Webhook URL",
+        "description": "Optional. POST each new request to this URL (Discord, Slack, or any HTTP endpoint). Leave blank to disable.",
+        "type": "text",
+        "default": ""
+      },
+      {
+        "key": "WEBHOOK_SECRET",
+        "name": "Webhook Secret",
+        "description": "Optional. If set, signs the webhook payload with HMAC-SHA256 and adds an X-Hub-Signature-256 header.",
+        "type": "text",
+        "default": ""
+      }
+    ]
   }
 ]
