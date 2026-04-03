@@ -278,7 +278,7 @@
         const editBtn = document.createElement('button');
         editBtn.id = 'jf-edit-btn';
         editBtn.className = 'jf-toggle-edit';
-        editBtn.innerHTML = '⚙️ Edit';
+        editBtn.innerHTML = '⚙️';
 
         const appArea = document.createElement('div');
         appArea.id = APP_AREA_ID;
@@ -287,7 +287,7 @@
             isEditMode = !isEditMode;
             appArea.classList.toggle('jf-edit-mode', isEditMode);
             editBtn.classList.toggle('active', isEditMode);
-            editBtn.innerHTML = isEditMode ? '💾 Done' : '⚙️ Edit';
+            editBtn.innerHTML = isEditMode ? '💾' : '⚙️';
         };
 
         header.appendChild(title);
