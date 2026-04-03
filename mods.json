@@ -18,7 +18,15 @@
     "permissions": [],
     "requires": [],
     "preconnect": [],
-    "vars": []
+    "vars": [
+      {
+        "key": "SECTION_TITLE",
+        "name": "Section Title",
+        "description": "What to name the visual layout header.",
+        "type": "text",
+        "default": "Apps"
+      }
+    ]
   },
   {
     "id": "custom-synthetic-tabs",
