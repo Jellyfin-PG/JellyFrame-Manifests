@@ -1,0 +1,612 @@
+[
+  {
+    "id": "jellyslate",
+    "name": "JellySlate",
+    "author": "grimmdev",
+    "description": "A clean, minimal dark theme for Jellyfin. Fully configurable accent color, background, text color, card radius, and font family. Optional frosted glass and extra-rounded corners addons.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "minimal",
+      "configurable",
+      "example"
+    ],
+    "previewUrl": "",
+    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@refs/heads/main/examples/jellyslate-theme.css",
+    "vars": [
+      {
+        "key": "ACCENT_COLOR",
+        "name": "Accent Color",
+        "description": "Applied to buttons, links, active tabs, and progress bars.",
+        "type": "color",
+        "default": "#00a4dc"
+      },
+      {
+        "key": "BACKGROUND_COLOR",
+        "name": "Background Color",
+        "description": "Main page background. Use a dark color for best results.",
+        "type": "color",
+        "default": "#0e0e14"
+      },
+      {
+        "key": "TEXT_COLOR",
+        "name": "Text Color",
+        "description": "Primary text color across the interface.",
+        "type": "color",
+        "default": "#e8e8f0"
+      },
+      {
+        "key": "CARD_RADIUS",
+        "name": "Card Radius",
+        "description": "Corner radius applied to media cards and dialogs.",
+        "type": "text",
+        "default": "8px"
+      },
+      {
+        "key": "FONT_FAMILY",
+        "name": "Font Family",
+        "description": "Font stack for the entire interface. Use any system font or a Google Fonts @import in a custom CSS addon.",
+        "type": "text",
+        "default": "ui-sans-serif, system-ui, -apple-system, sans-serif"
+      },
+      {
+        "key": "ENABLE_BLUR",
+        "name": "Frosted Glass",
+        "description": "Adds backdrop-filter blur to the sidebar, header, and dialogs.",
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "key": "ENABLE_ROUNDED",
+        "name": "Extra Rounded",
+        "description": "Applies stronger corner rounding to the sidebar, header, and dialogs.",
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "addons": [
+      {
+        "id": "blur-addon",
+        "name": "Frosted Glass",
+        "description": "Backdrop blur on the navigation drawer, header, and all dialogs.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@refs/heads/main/examples/jellyslate-addon-blur.css",
+        "triggerVar": "ENABLE_BLUR"
+      },
+      {
+        "id": "rounded-addon",
+        "name": "Extra Rounded",
+        "description": "Stronger corner rounding on the sidebar, header, dialogs, inputs, and buttons.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@refs/heads/main/examples/jellyslate-addon-rounded.css",
+        "triggerVar": "ENABLE_ROUNDED"
+      }
+    ]
+  },
+  {
+    "id": "better-jellyfin-ui",
+    "name": "Better Jellyfin UI",
+    "author": "tromoSM",
+    "description": "A refined and modern UI enhancement focused on improved layout, animations, and iOS-inspired design.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "modern",
+      "animated",
+      "ios"
+    ],
+    "previewUrl": "https://github.com/tromoSM/better-jellyfin-ui/blob/main/Assets/desktop-main.png?raw=true",
+    "sourceUrl": "https://github.com/tromoSM/better-jellyfin-ui",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/theme.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": [
+      {
+        "id": "floating-header",
+        "name": "Floating Header",
+        "description": "Makes the header float over content.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/Floating-header.css"
+      },
+      {
+        "id": "high-contrast",
+        "name": "High Contrast Interface",
+        "description": "Increases contrast throughout the UI.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/High-contrast-interface.css"
+      },
+      {
+        "id": "scale-hover",
+        "name": "Scale Animation on Hover",
+        "description": "Adds a scale-up animation to media cards on hover.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/Scale-up-animation-on-hover-card.css"
+      }
+    ]
+  },
+  {
+    "id": "catppuccin-latte",
+    "name": "Catppuccin Latte",
+    "author": "catppuccin",
+    "description": "The soothing pastel light variant of the Catppuccin theme for Jellyfin.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "light",
+      "pastel",
+      "catppuccin"
+    ],
+    "previewUrl": "https://github.com/catppuccin/jellyfin/raw/main/assets/latte.webp",
+    "sourceUrl": "https://github.com/catppuccin/jellyfin",
+    "cssUrl": "https://jellyfin.catppuccin.com/catppuccin-latte.css",
+    "preconnect": [
+      "https://jellyfin.catppuccin.com"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "catppuccin-frappe",
+    "name": "Catppuccin Frappe",
+    "author": "catppuccin",
+    "description": "A cool, calm dark variant of the Catppuccin theme for Jellyfin.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "pastel",
+      "catppuccin"
+    ],
+    "previewUrl": "https://github.com/catppuccin/jellyfin/raw/main/assets/frappe.webp",
+    "sourceUrl": "https://github.com/catppuccin/jellyfin",
+    "cssUrl": "https://jellyfin.catppuccin.com/catppuccin-frappe.css",
+    "preconnect": [
+      "https://jellyfin.catppuccin.com"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "catppuccin-macchiato",
+    "name": "Catppuccin Macchiato",
+    "author": "catppuccin",
+    "description": "A warm, darker variant of the Catppuccin theme for Jellyfin.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "pastel",
+      "catppuccin"
+    ],
+    "previewUrl": "https://github.com/catppuccin/jellyfin/raw/main/assets/macchiato.webp",
+    "sourceUrl": "https://github.com/catppuccin/jellyfin",
+    "cssUrl": "https://jellyfin.catppuccin.com/catppuccin-macchiato.css",
+    "preconnect": [
+      "https://jellyfin.catppuccin.com"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "catppuccin-mocha",
+    "name": "Catppuccin Mocha",
+    "author": "catppuccin",
+    "description": "The darkest and most popular Catppuccin variant for Jellyfin.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "pastel",
+      "catppuccin"
+    ],
+    "previewUrl": "https://github.com/catppuccin/jellyfin/raw/main/assets/mocha.webp",
+    "sourceUrl": "https://github.com/catppuccin/jellyfin",
+    "cssUrl": "https://jellyfin.catppuccin.com/catppuccin-mocha.css",
+    "preconnect": [
+      "https://jellyfin.catppuccin.com"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "elegantfin",
+    "name": "ElegantFin",
+    "author": "lscambo13",
+    "description": "A sleek, elegant Jellyfin theme with a focus on clean typography and polished layouts.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "elegant",
+      "minimal"
+    ],
+    "previewUrl": "https://github.com/lscambo13/ElegantFin/blob/main/Previews/previews-v25.08.02/optimized/desktop/1.%20Homepage.webp?raw=true",
+    "sourceUrl": "https://github.com/lscambo13/ElegantFin",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "evergarden-winter",
+    "name": "Evergarden Winter",
+    "author": "everviolet",
+    "description": "A cool, icy colour palette from the Evergarden seasonal theme collection.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "seasonal",
+      "evergarden"
+    ],
+    "previewUrl": "https://github.com/everviolet/jellyfin/raw/main/assets/winter.webp",
+    "sourceUrl": "https://github.com/everviolet/jellyfin",
+    "cssUrl": "https://everviolet.github.io/jellyfin/evergarden-winter.css",
+    "preconnect": [
+      "https://everviolet.github.io"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "evergarden-spring",
+    "name": "Evergarden Spring",
+    "author": "everviolet",
+    "description": "A fresh, green-tinted palette from the Evergarden seasonal theme collection.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "seasonal",
+      "evergarden"
+    ],
+    "previewUrl": "https://github.com/everviolet/jellyfin/raw/main/assets/spring.webp",
+    "sourceUrl": "https://github.com/everviolet/jellyfin",
+    "cssUrl": "https://everviolet.github.io/jellyfin/evergarden-spring.css",
+    "preconnect": [
+      "https://everviolet.github.io"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "evergarden-summer",
+    "name": "Evergarden Summer",
+    "author": "everviolet",
+    "description": "A warm, vibrant palette from the Evergarden seasonal theme collection.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "seasonal",
+      "evergarden"
+    ],
+    "previewUrl": "https://github.com/everviolet/jellyfin/raw/main/assets/summer.webp",
+    "sourceUrl": "https://github.com/everviolet/jellyfin",
+    "cssUrl": "https://everviolet.github.io/jellyfin/evergarden-summer.css",
+    "preconnect": [
+      "https://everviolet.github.io"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "evergarden-fall",
+    "name": "Evergarden Fall",
+    "author": "everviolet",
+    "description": "A warm, amber-toned palette from the Evergarden seasonal theme collection.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "seasonal",
+      "evergarden"
+    ],
+    "previewUrl": "https://github.com/everviolet/jellyfin/raw/main/assets/fall.webp",
+    "sourceUrl": "https://github.com/everviolet/jellyfin",
+    "cssUrl": "https://everviolet.github.io/jellyfin/evergarden-fall.css",
+    "preconnect": [
+      "https://everviolet.github.io"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "finimalism",
+    "name": "Finimalism",
+    "author": "tedhinklater",
+    "description": "A minimal, clean Jellyfin theme that keeps the default aesthetic while adding polish and refinement.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "minimal",
+      "clean",
+      "dark"
+    ],
+    "previewUrl": "https://github.com/user-attachments/assets/caaa8d3a-c3f1-46d7-8a51-4ba6f08c047f",
+    "sourceUrl": "https://github.com/tedhinklater/finimalism",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/Finimalism12.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "flow",
+    "name": "Flow",
+    "author": "LitCastVlog",
+    "description": "A smooth, animated Jellyfin theme with optional addons for drawer toggle, episode grid, and colour variants.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "animated",
+      "modern"
+    ],
+    "previewUrl": "https://github.com/LitCastVlog/Flow/raw/main/images/screen.jpg",
+    "sourceUrl": "https://github.com/LitCastVlog/Flow",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-main.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": [
+      {
+        "id": "flow-extras",
+        "name": "Extras",
+        "description": "Additional UI refinements and extra styling.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-Extras.css"
+      },
+      {
+        "id": "flow-drawer",
+        "name": "Drawer Toggle",
+        "description": "Adds a toggle button for the navigation drawer.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-Drawer-Toggle.css"
+      },
+      {
+        "id": "flow-episode-grid",
+        "name": "Episode Grid",
+        "description": "Improved episode grid layout for TV shows.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-EpisodeGrid.css"
+      }
+    ]
+  },
+  {
+    "id": "finity",
+    "name": "Finity",
+    "author": "prism2001",
+    "description": "A polished dark theme for Jellyfin with featured content display and clean card styling.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "modern",
+      "featured"
+    ],
+    "previewUrl": "https://github.com/prism2001/finity/raw/main/screenshots/home_featured.png",
+    "sourceUrl": "https://github.com/prism2001/finity",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/prism2001/finity@main/complete/slideshowpure.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "infinitv",
+    "name": "InfiniTV",
+    "author": "buesche87",
+    "description": "A comprehensive dark theme for Jellyfin with custom animations and a fully redesigned interface.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "modern",
+      "animated"
+    ],
+    "previewUrl": "https://github.com/user-attachments/assets/8e61244a-38e7-49f2-b6c6-5cbdd2dc03a8",
+    "sourceUrl": "https://github.com/buesche87/infinitv",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/buesche87/infinitv@main/infinitv.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "jamfin",
+    "name": "Jamfin",
+    "author": "JamsRepos",
+    "description": "A sleek glassmorphism-inspired dark theme for Jellyfin with frosted glass effects and modern aesthetics.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "glassmorphism",
+      "modern"
+    ],
+    "previewUrl": "https://github.com/JamsRepos/Jamfin/raw/main/assets/screenshots/home.jpg",
+    "sourceUrl": "https://github.com/JamsRepos/Jamfin",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/complete.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "jellyskin",
+    "name": "JellySkin",
+    "author": "prayag17",
+    "description": "A vibrant, minimal Jellyfin theme with custom icons and carefully refined UI elements.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "minimal",
+      "icons"
+    ],
+    "previewUrl": "https://user-images.githubusercontent.com/55829513/200134094-9bafba9d-4cfa-48c3-bbf4-e01bc21ecdd1.png",
+    "sourceUrl": "https://github.com/prayag17/JellySkin",
+    "cssUrl": "https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/main.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": [
+      {
+        "id": "jellyskin-logo",
+        "name": "Custom Logo",
+        "description": "Replaces the Jellyfin logo with a custom icon.",
+        "cssUrl": "https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/logo.css"
+      },
+      {
+        "id": "jellyskin-horizontal",
+        "name": "Horizontal My Media",
+        "description": "Displays the My Media section horizontally.",
+        "cssUrl": "https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/horizontalMyMedia.css"
+      }
+    ]
+  },
+  {
+    "id": "jellyfin-better-styles",
+    "name": "Jellyfin Better Styles",
+    "author": "Tetrax-10",
+    "description": "Preserves the original Jellyfin aesthetics while upgrading layout and animations for a more polished experience.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "minimal",
+      "animated",
+      "polished"
+    ],
+    "previewUrl": "https://raw.githubusercontent.com/Tetrax-10/jellyfin-better-styles/main/assets/movie-tv-page.png",
+    "sourceUrl": "https://github.com/Tetrax-10/jellyfin-better-styles",
+    "cssUrl": "https://tetrax-10.github.io/jellyfin-better-styles/theme.css",
+    "preconnect": [
+      "https://tetrax-10.github.io"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "neutralfin",
+    "name": "NeutralFin",
+    "author": "KartoffelChipss",
+    "description": "Based on ElegantFin, featuring a sleek black and grey colour scheme for a neutral, modern look.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "minimal",
+      "monochrome"
+    ],
+    "previewUrl": "https://github.com/KartoffelChipss/NeutralFin/raw/main/assets/neutralfin-home.webp",
+    "sourceUrl": "https://github.com/KartoffelChipss/NeutralFin",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/KartoffelChipss/NeutralFin@latest/theme/neutralfin-minified.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "ultrachromic",
+    "name": "Ultrachromic",
+    "author": "CTalvio",
+    "description": "The final form of the chromic theme saga \u2014 a highly customisable dark theme with multiple presets and addons.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "customisable",
+      "presets"
+    ],
+    "previewUrl": "https://user-images.githubusercontent.com/4365015/127774204-03957527-7178-4ea2-8674-d83fe6a97d1c.png",
+    "sourceUrl": "https://github.com/CTalvio/Ultrachromic",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/presets/monochromic_preset.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": [
+      {
+        "id": "ultrachromic-fixes",
+        "name": "Bug Fixes",
+        "description": "Community-contributed fixes for various UI issues.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/fixes.css"
+      },
+      {
+        "id": "ultrachromic-font",
+        "name": "Custom Font",
+        "description": "Applies the Ultrachromic recommended font.",
+        "cssUrl": "https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/jf_font.css"
+      }
+    ]
+  },
+  {
+    "id": "scyfin",
+    "name": "Scyfin",
+    "author": "loof2736",
+    "description": "A dark Jellyfin theme with backdrop support and multiple colour scheme options.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "dark",
+      "backdrops",
+      "colour-schemes"
+    ],
+    "previewUrl": "https://github.com/loof2736/scyfin/raw/main/images/homepage.png",
+    "sourceUrl": "https://github.com/loof2736/scyfin",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/scyfin-theme.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "zestytheme",
+    "name": "ZestyTheme",
+    "author": "stpnwf",
+    "description": "A minimal and elegant Jellyfin theme with multiple colour scheme options including blue, coral, and gray.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "minimal",
+      "elegant",
+      "colour-schemes"
+    ],
+    "previewUrl": "https://github.com/stpnwf/ZestyTheme/blob/main/images/home.jpg",
+    "sourceUrl": "https://github.com/stpnwf/ZestyTheme",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/theme.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  },
+  {
+    "id": "zombie-release",
+    "name": "Zombie",
+    "author": "MakD",
+    "description": "A popular Jellyfin theme combining the best from public themes, with multiple colour schemes including Amazon Prime, AppleTV, Disney, and HBO Max.",
+    "version": "1.0.0",
+    "jellyfin": "10.9+",
+    "tags": [
+      "dark",
+      "popular",
+      "colour-schemes"
+    ],
+    "previewUrl": "https://github.com/MakD/zombie-release/blob/main/img/desktop/homepage.png?raw=true",
+    "sourceUrl": "https://github.com/MakD/zombie-release",
+    "cssUrl": "https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/zombie_revived.css",
+    "preconnect": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "vars": [],
+    "addons": []
+  }
+]
