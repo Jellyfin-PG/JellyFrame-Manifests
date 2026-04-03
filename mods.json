@@ -139,7 +139,7 @@
     "name": "Media Request",
     "author": "grimmdev",
     "description": "Adds a Request Media button to the left-hand navigation menu. Users can submit requests for movies, TV shows, music, or any configured media type. Requests are stored server-side and optionally forwarded to a webhook (Discord, Slack, custom).",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "jellyfin": "10.10+",
     "tags": [
       "ui",
