@@ -6,7 +6,7 @@ jf.onStop(function() {
     jf.log.info('Custom Synthetic Tabs mod stopped.');
 });
 
-jf.routes.get('/page.html', function(req, res) {
+jf.routes.get('/page', function(req, res) {
     var htmlContent = jf.vars['CUSTOM_HTML'];
     
     if (!htmlContent) {
