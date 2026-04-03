@@ -21,6 +21,45 @@
     "vars": []
   },
   {
+    "id": "custom-synthetic-tabs",
+    "name": "Custom Synthetic Tabs",
+    "author": "yourname",
+    "description": "Adds a custom tab to the UI that loads a synthetic HTML page with its own isolated JS/CSS.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": ["ui", "server"],
+    "previewUrl": "",
+    "sourceUrl": "",
+    "cssUrl": null,
+    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/custom-tab-client.js",
+    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/custom-tab-server.js",
+    "permissions": [],
+    "requires": [],
+    "vars": [
+      {
+        "key": "TAB_NAME",
+        "name": "Tab Name",
+        "description": "The label shown on the custom tab.",
+        "type": "text",
+        "default": "Custom Page"
+      },
+      {
+        "key": "TAB_TOP_OFFSET",
+        "name": "Tab Top Offset",
+        "description": "Adjust this based on your theme to place the page perfectly under the top bar.",
+        "type": "text",
+        "default": "115px"
+      },
+      {
+        "key": "CUSTOM_HTML",
+        "name": "Custom HTML Content",
+        "description": "The raw HTML, CSS, and JS to load inside the synthetic page.",
+        "type": "text",
+        "default": "<!DOCTYPE html><html><head><style>body { color: white; font-family: sans-serif; padding: 2rem; }</style></head><body><h1>Welcome to your custom page!</h1><button onclick=\"alert('JS works!')\">Test JS</button></body></html>"
+      }
+    ]
+  },
+  {
     "id": "media-bar",
     "name": "Media Bar",
     "author": "grimmdev",
