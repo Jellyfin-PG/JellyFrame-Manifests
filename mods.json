@@ -1,5 +1,26 @@
 [
   {
+    "id": "home-app-layout",
+    "name": "Home App Layout",
+    "author": "grimmdev",
+    "description": "A layout framework for home page app/cards.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "home",
+      "ui"
+    ],
+    "previewUrl": "",
+    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame-Resources",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/app-layout.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
+  },
+  {
     "id": "media-bar",
     "name": "Media Bar",
     "author": "grimmdev",
