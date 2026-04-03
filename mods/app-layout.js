@@ -1,7 +1,3 @@
-/**
- * Jellyfin App Framework - Visual Layout Edition
- * Includes Drag & Drop reordering, Live Resizing, and LocalStorage persistence.
- */
 (function () {
     'use strict';
 
@@ -10,6 +6,8 @@
     const STORAGE_KEY = "jf-app-layout-state";
 
     let isEditMode = false;
+    
+    const sectionTitle = '{{SECTION_TITLE}}' || 'Apps';
 
     const generateGridCSS = () => {
         let styles = '';
@@ -25,7 +23,6 @@
     };
 
     const CSS = `
-        /* ── WRAPPER & HEADER ── */
         #jf-app-wrapper {
             width: 100%;
             margin-top: 20px;
@@ -36,7 +33,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 38px;
-            margin-bottom: -15px; /* Pulls the grid up slightly to look connected */
+            margin-bottom: -15px;
         }
 
         .jf-app-title {
@@ -48,7 +45,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* The Inline Edit Button */
         .jf-toggle-edit {
             background: rgba(20, 20, 20, 0.6);
             color: #fff;
@@ -76,7 +72,6 @@
             border-color: #f87171; 
         }
 
-        /* ── GRID SYSTEM ── */
         #${APP_AREA_ID} {
             display: grid !important;
             grid-template-columns: repeat(12, 1fr) !important;
@@ -87,7 +82,6 @@
             position: relative;
         }
 
-        /* Base App Styling */
         .app {
             background: rgba(20, 20, 20, 0.6);
             backdrop-filter: blur(25px) saturate(1.4);
@@ -99,13 +93,12 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.5);
             font-family: 'Inter', system-ui, sans-serif;
             box-sizing: border-box !important;
-            grid-column: span 12; /* Default */
+            grid-column: span 12;
             min-width: 0;
             position: relative;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        /* ── EDIT MODE STYLES ── */
         .jf-edit-mode .app {
             border: 2px dashed #00a4dc !important;
             cursor: grab;
@@ -120,7 +113,6 @@
             box-shadow: 0 20px 50px rgba(0,164,220,0.4);
         }
 
-        /* The Overlay Controls inside the App */
         .jf-app-controls {
             display: none;
             position: absolute;
@@ -172,7 +164,7 @@
         });
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(layout));
-        console.log("[Framework] Layout Saved!", layout);
+        console.log(layout);
     }
 
     function applySavedState(app) {
@@ -277,12 +269,12 @@
 
         const title = document.createElement('h2');
         title.className = 'jf-app-title';
-        title.textContent = 'Apps';
+        title.textContent = sectionTitle;
 
         const editBtn = document.createElement('button');
         editBtn.id = 'jf-edit-btn';
         editBtn.className = 'jf-toggle-edit';
-        editBtn.innerHTML = '⚙️ Edit';
+        editBtn.innerHTML = '⚙️';
 
         const appArea = document.createElement('div');
         appArea.id = APP_AREA_ID;
@@ -291,7 +283,7 @@
             isEditMode = !isEditMode;
             appArea.classList.toggle('jf-edit-mode', isEditMode);
             editBtn.classList.toggle('active', isEditMode);
-            editBtn.innerHTML = isEditMode ? '💾 Done' : '⚙️ Edit';
+            editBtn.innerHTML = isEditMode ? '💾' : '⚙️';
         };
 
         header.appendChild(title);
@@ -316,7 +308,6 @@
         observer.observe(appArea, { childList: true });
 
         window.dispatchEvent(new CustomEvent('jfAppAreaReady', { detail: { container: appArea } }));
-        console.log("[Framework] Advanced Visual Grid Ready.");
     }
 
     const findAndInject = () => {
