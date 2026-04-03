@@ -62,5 +62,76 @@
         "default": "true"
       }
     ]
+  },
+  {
+    "id": "are-you-still-watching",
+    "name": "Are you still watching?",
+    "author": "grimmdev",
+    "description": "Shows an 'Are you still watching?' prompt after a period of inactivity during playback. If not dismissed, the player exits automatically. Fully configurable timing, text, and colours.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "player",
+      "idle",
+      "utility"
+    ],
+    "previewUrl": "",
+    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame",
+    "cssUrl": null,
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@main/examples/are-you-still-watching-client.js",
+    "serverJs": null,
+    "permissions": [],
+    "requires": [],
+    "vars": [
+      {
+        "key": "IDLE_MINUTES",
+        "name": "Idle Time (minutes)",
+        "description": "How many minutes of uninterrupted playback before the prompt appears. Default is 180 (3 hours).",
+        "type": "number",
+        "default": "180"
+      },
+      {
+        "key": "PROMPT_SECONDS",
+        "name": "Prompt Timeout (seconds)",
+        "description": "How many seconds the prompt stays on screen before the player exits. Default is 60.",
+        "type": "number",
+        "default": "60"
+      },
+      {
+        "key": "PROMPT_TEXT",
+        "name": "Prompt Message",
+        "description": "The heading text shown on the prompt overlay.",
+        "type": "text",
+        "default": "Are you still watching?"
+      },
+      {
+        "key": "BUTTON_TEXT",
+        "name": "Button Label",
+        "description": "Text on the continue watching button.",
+        "type": "text",
+        "default": "Continue Watching"
+      },
+      {
+        "key": "BUTTON_COLOR",
+        "name": "Button Color",
+        "description": "Background color of the continue watching button.",
+        "type": "color",
+        "default": "#10b981"
+      },
+      {
+        "key": "TEXT_COLOR",
+        "name": "Text Color",
+        "description": "Color of the prompt heading and countdown text.",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "key": "OVERLAY_COLOR",
+        "name": "Overlay Background",
+        "description": "Background color of the overlay. Use rgba() for transparency, e.g. rgba(0,0,0,0.85).",
+        "type": "text",
+        "default": "rgba(0,0,0,0.85)"
+      }
+    ]
   }
 ]
