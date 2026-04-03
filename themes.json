@@ -12,7 +12,7 @@
       "configurable",
       "example"
     ],
-    "previewUrl": "",
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@main/examples/jellyslate.png",
     "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame",
     "cssUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@refs/heads/main/examples/jellyslate-theme.css",
     "vars": [
@@ -582,7 +582,7 @@
       "elegant",
       "colour-schemes"
     ],
-    "previewUrl": "https://github.com/stpnwf/ZestyTheme/blob/main/images/home.jpg",
+    "previewUrl": "https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@main/images/home.jpg",
     "sourceUrl": "https://github.com/stpnwf/ZestyTheme",
     "cssUrl": "https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/theme.css",
     "preconnect": [
