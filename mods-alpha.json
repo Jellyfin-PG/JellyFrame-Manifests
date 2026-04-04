@@ -14,7 +14,7 @@
         "default": "#00a4dc"
       }
     ],
-    "jsUrl": "https://cdn.example.com/chat/browser.js",
-    "serverJs": "https://cdn.example.com/chat/server.js"
+    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-chat-client.js",
+    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-chat-server.js"
   }
 ]
