@@ -1,0 +1,20 @@
+[
+  {
+    "id": "jelly-chat",
+    "name": "JellyChat Realtime",
+    "author": "grimmdev",
+    "description": "Facebook-style chat and online status for all users.",
+    "version": "1.1.0",
+    "permissions": ["jellyfin.read", "store"],
+    "vars": [
+      {
+        "key": "ACCENT_COLOR",
+        "name": "Chat Theme Color",
+        "type": "color",
+        "default": "#00a4dc"
+      }
+    ],
+    "jsUrl": "https://cdn.example.com/chat/browser.js",
+    "serverJs": "https://cdn.example.com/chat/server.js"
+  }
+]
