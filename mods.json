@@ -634,23 +634,5 @@
     "requires": [],
     "preconnect": [],
     "vars": []
-  },
-  {
-  "id": "jelly-chat",
-  "name": "Jellyfin Realtime Chat",
-  "author": "grimmdev",
-  "description": "Facebook-style chat and online status for all users.",
-  "version": "0.0.2",
-  "permissions": ["jellyfin.read", "store"],
-  "vars": [
-    {
-      "key": "ACCENT_COLOR",
-      "name": "Chat Theme Color",
-      "type": "color",
-      "default": "#00a4dc"
-    }
-  ],
-  "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-chat-client.js",
-  "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-chat-server.js"
-}
+  }
 ]
