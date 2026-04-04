@@ -11,7 +11,7 @@
       "ui"
     ],
     "previewUrl": "",
-    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame-Resources",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": "",
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/app-layout.js",
     "serverJs": "",
@@ -36,8 +36,8 @@
     "version": "1.0.1",
     "jellyfin": "10.10+",
     "tags": ["ui", "server"],
-    "previewUrl": "",
-    "sourceUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/custom-tab.png",
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/custom-tab.png",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": null,
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/custom-tab-client.js",
     "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/custom-tab-server.js",
@@ -81,7 +81,7 @@
       "ui"
     ],
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-bar.png",
-    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame-Resources",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-bar-style.css",
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-bar-client.js",
     "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-bar-server.js",
@@ -144,7 +144,7 @@
       "utility"
     ],
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/are-you-still-watching.png",
-    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame-Resources",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": null,
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/are-you-still-watching-client.js",
     "serverJs": null,
@@ -215,7 +215,7 @@
       "community"
     ],
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-request.png",
-    "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame-Resources",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": null,
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-request-client.js",
     "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-request-server.js",
@@ -605,9 +605,30 @@
       "header"
     ],
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/BatteryIcon/thumbnail.png",
-    "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/BatteryIcon",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": "",
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/BatteryIcon/BatteryIcon.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "recent-movie-pills",
+    "name": "Recent Movie Pills",
+    "author": "grimmdev",
+    "description": "Shows pills that filter recent movies on the home page.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "movies"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/recent-movie-pills.png",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/recent-movie-pills-client.js",
     "serverJs": "",
     "permissions": [],
     "requires": [],
