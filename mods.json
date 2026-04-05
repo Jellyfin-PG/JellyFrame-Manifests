@@ -29,6 +29,27 @@
     ]
   },
   {
+    "id": "home-page-editor",
+    "name": "Home Page Editor",
+    "author": "grimmdev",
+    "description": "A visual editor for apps and the homepage.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": [
+      "home",
+      "ui"
+    ],
+    "previewUrl": "",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/homepage-editor.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": ["home-app-layout"],
+    "preconnect": [],
+    "vars": []
+  },
+  {
     "id": "custom-synthetic-tabs",
     "name": "Custom Synthetic Tabs",
     "author": "yourname",
