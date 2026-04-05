@@ -634,5 +634,27 @@
     "requires": [],
     "preconnect": [],
     "vars": []
+  },
+  {
+    "id": "jelly-chat",
+    "name": "JellyChat",
+    "author": "grimmdev",
+    "description": "Jellyfin chat, directly in real time with other users.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "header",
+      "chat"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-chat.png",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
+    "cssUrl": "",
+    "jsUrl": "ttps://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-chat-client.js",
+    "serverJs": "ttps://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-chat-server.js",
+    "permissions": ["jellyfin.read", "store"],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
   }
 ]
