@@ -640,7 +640,7 @@
     "name": "JellyChat",
     "author": "grimmdev",
     "description": "Jellyfin chat, directly in real time with other users.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "jellyfin": "10.11+",
     "tags": [
       "ui",
