@@ -656,5 +656,27 @@
     "requires": [],
     "preconnect": [],
     "vars": []
+  },
+  {
+    "id": "jellyfin-episodes-ratings-grid",
+    "name": "Jellyfin Episodes Ratings Grid",
+    "author": "Damocles-fr",
+    "description": "Display the IMDb episodes ratings heatmap grid on Jellyfin TV Series pages. The userscript adds the grid to TV Shows pages between Seasons and Cast, inside a drop-down section that stays closed by default to avoid spoilers.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "episodes",
+      "imdb"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Damocles-fr/jellyfin-imdb-episodes-heatmap-ratings-grid@main/assets/Jellyfin-Episodes-Ratings-Grid-1.4.webp",
+    "sourceUrl": "https://github.com/Damocles-fr/jellyfin-imdb-episodes-heatmap-ratings-grid",
+    "cssUrl": "",
+    "jsUrl": "  https://cdn.jsdelivr.net/gh/Damocles-fr/jellyfin-imdb-episodes-heatmap-ratings-grid@main/Jellyfin-Episodes-Ratings-Grid-JF-Library-Links.js",
+    "serverJs": "",
+    "permissions": ["jellyfin.read", "store"],
+    "requires": [],
+    "preconnect": [],
+    "vars": []
   }
 ]
