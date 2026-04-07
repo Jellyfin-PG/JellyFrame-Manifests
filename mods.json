@@ -720,8 +720,7 @@
     "requires": [],
     "preconnect": [],
     "vars": []
-  }
-  ,
+  },
   {
     "id": "weather-card-homepage",
     "name": "Weather App Homepage",
@@ -737,6 +736,27 @@
     "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": "",
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/weather-card-client.v1.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": ["home-app-layout"],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "my-pet-homepage",
+    "name": "My Pet Homepage",
+    "author": "Grimmdev",
+    "description": "A homepage app that adds a pet to take care of.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "homepage"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/my-pet.png",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/my-pet.min.js",
     "serverJs": "",
     "permissions": [],
     "requires": ["home-app-layout"],
