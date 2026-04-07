@@ -4,7 +4,7 @@
     "name": "Media Request",
     "author": "grimmdev",
     "description": "Adds a Request Media button to the left-hand navigation menu. Users can submit requests for movies, TV shows, music, or any configured media type. Requests are stored server-side and optionally forwarded to a webhook (Discord, Slack, custom).",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "jellyfin": "10.10+",
     "tags": [
       "ui",
@@ -14,8 +14,8 @@
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-request.png",
     "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": null,
-    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-request-client.js",
-    "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/media-request-server.js",
+    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/media-request-client.v2.js",
+    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/media-request-server.v2.js",
     "permissions": [
       "store",
       "webhooks"
