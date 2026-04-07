@@ -18,7 +18,9 @@
     "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/media-request-server.v2.js",
     "permissions": [
       "store",
-      "webhooks"
+      "webhooks",
+      "jellyfin.read",
+      "jellyfin.write"
     ],
     "requires": [],
     "vars": [
