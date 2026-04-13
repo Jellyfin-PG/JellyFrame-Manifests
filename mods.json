@@ -1,5 +1,22 @@
 [
   {
+    "id": "hot-library",
+    "name": "Hot Library Heatmap",
+    "author": "grimmdev",
+    "description": "Posters emit a glow determined by all users watch history.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": ["ui", "server"],
+    "previewUrl": "",
+    "sourceUrl": "",
+    "cssUrl": null,
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/hot-library-client.js",
+    "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/hot-library-server.js",
+    "permissions": ["jellyfin.read"],
+    "requires": [],
+    "vars": []
+  },
+  {
     "id": "community-ratings",
     "name": "Community Ratings",
     "author": "grimmdev",
