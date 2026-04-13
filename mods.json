@@ -1,5 +1,33 @@
 [
   {
+    "id": "jelly-rpg",
+    "name": "Jelly RPG",
+    "author": "grimmdev",
+    "description": "Makes jellyfin a role playing game.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": ["ui", "server", "gamification", "rpg"],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg.png",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-client.js",
+    "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-server.js",
+    "permissions": ["jellyfin.read", "store"],
+    "vars": [
+      {
+        "key": "XP_COLOR",
+        "name": "Theme Color",
+        "type": "color",
+        "default": "#8a2be2",
+        "allowGradient": true
+      },
+      {
+        "key": "LEVEL_UP_COLOR",
+        "name": "Level Up Flash Color",
+        "type": "color",
+        "default": "#ffd700"
+      }
+    ]
+  },
+  {
     "id": "hot-library",
     "name": "Hot Library Heatmap",
     "author": "grimmdev",
