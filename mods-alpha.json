@@ -1,20 +1,19 @@
 [
   {
-    "id": "community-ratings",
-    "name": "Community Ratings",
-    "author": "grimmdev",
-    "description": "Let every user rate media 0-10. Shows aggregate star ratings on all media cards (home, library, favorites) and a full interactive widget on detail pages.",
-    "version": "0.0.1",
-    "jellyfin": "10.11+",
-    "tags": ["ratings", "community", "ui", "server"],
-    "previewUrl": "",
-    "sourceUrl": "",
-    "cssUrl": null,
-    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/community-ratings-client.js",
-    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/community-ratings-server.js",
-    "permissions": ["jellyfin.read", "store"],
-    "requires": [],
-    "preconnect": [],
-    "vars": []
-  }
+  "id": "hot-library",
+  "name": "Hot Library Heatmap",
+  "author": "yourname",
+  "description": "Posters emit a thermal glow based on your watch history (Red = 5+ plays, Yellow = 1+ plays, Blue = Unplayed).",
+  "version": "1.0.0",
+  "jellyfin": "10.11+",
+  "tags": ["ui", "server"],
+  "previewUrl": "",
+  "sourceUrl": "",
+  "cssUrl": null,
+  "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/hot-library-client.js",
+  "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/hot-library-server.js",
+  "permissions": ["jellyfin.read"],
+  "requires": [],
+  "vars": []
+}
 ]
