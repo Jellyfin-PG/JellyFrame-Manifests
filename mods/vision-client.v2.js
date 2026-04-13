@@ -1,0 +1,280 @@
+(function () {
+    'use strict';
+
+    const OSD_GAP = 25, EDGE_GAP = 40;
+    let activeItem = null, trivia = [], idx = 0, visible = false, rafId = null, teardown = false;
+    let _overlay = null, _text = null, _label = null;
+
+    const $ = id => document.getElementById(id);
+    const qs = sel => document.querySelector(sel);
+
+    const css = `#jf-insight-overlay{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);width:90%;max-width:700px;background:rgba(10,10,10,.5);backdrop-filter:blur(25px) saturate(1.2);-webkit-backdrop-filter:blur(25px) saturate(1.2);border:1px solid rgba(255,255,255,.1);border-radius:16px;z-index:999999;display:flex;flex-direction:column;padding:25px;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),bottom .4s cubic-bezier(.16,1,.3,1);color:#fff;font-family:'Instrument Serif',serif;box-shadow:0 20px 50px rgba(0,0,0,.5);bottom:${EDGE_GAP}px}#jf-insight-overlay.active{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}.insight-content{text-align:left;width:100%}.insight-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.insight-label{font-family:'Geist Mono',monospace;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:#00a4dc;opacity:.8}.insight-text{font-size:clamp(18px,2.5vw,22px);line-height:1.4;margin-bottom:20px;font-weight:400;letter-spacing:-.01em;opacity:0;transition:opacity .3s ease-out}.insight-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:15px}.insight-nav{font-family:'Geist Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);cursor:pointer;transition:color .3s;text-transform:uppercase;letter-spacing:.15em}.insight-nav:hover{color:#fff}#jf-vision-trigger{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:4px;margin:0 8px;padding:0 12px;height:32px;font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s ease;vertical-align:middle;color:#eee}#jf-vision-trigger:hover{background:rgba(255,255,255,.2);color:#00a4dc}#jf-vision-trigger.active-mode{background:rgba(0,164,220,.2);color:#00a4dc;border-color:rgba(0,164,220,.5);box-shadow:0 0 15px rgba(0,164,220,.1)}#jf-vision-trigger .material-icons{font-size:14px}@media(max-width:600px){#jf-insight-overlay{width:85%;padding:16px;border-radius:12px}.insight-text{font-size:clamp(14px,3.5vw,17px);margin-bottom:14px}.insight-label{font-size:7px}.insight-nav{font-size:8px}.insight-footer{padding-top:10px}}`;
+
+    const injectStyles = () => {
+        if ($('jf-insight-styles')) return;
+        const s = document.createElement('style');
+        s.id = 'jf-insight-styles';
+        s.textContent = css;
+        document.head.appendChild(s);
+    };
+
+    const updatePosition = () => {
+        if (!visible) return;
+        try {
+            if (!_overlay) return;
+            const osdControls = qs('.osdControls');
+            const osdParent = osdControls?.closest('.videoOsdBottom');
+            const osdActive = osdParent && !osdParent.classList.contains('hide') && !osdParent.classList.contains('videoOsdBottom-hidden');
+            
+            let targetBottom = EDGE_GAP;
+            if (osdActive && qs('video') && osdControls) {
+                const rect = osdControls.getBoundingClientRect();
+                if (rect.top > 0 && rect.top < window.innerHeight) {
+                    targetBottom = window.innerHeight - rect.top + OSD_GAP;
+                }
+            }
+            _overlay.style.bottom = `${targetBottom}px`;
+        } catch (e) {
+            console.error('Insight Mod Pos Error:', e);
+        }
+        rafId = requestAnimationFrame(updatePosition);
+    };
+
+    const fetchWithTimeout = async (url, timeout = 3000) => {
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), timeout);
+        try { const r = await fetch(url, { signal: ctrl.signal }); clearTimeout(t); return r; }
+        catch { clearTimeout(t); return null; }
+    };
+
+    const fetchTrivia = async item => {
+        if (!item?.Name) return [{ label: "The Mystery", text: "The narrative remains hidden." }];
+        const out = [];
+
+        const dir = item.People?.find(p => p.Type === 'Director')?.Name;
+        if (dir) out.push({ label: "The Vision", text: `Directed by the hand of ${dir}.` });
+
+        const actors = item.People?.filter(p => p.Type === 'Actor').slice(0, 4) || [];
+        actors.forEach(a => {
+            if (a.Name) out.push({ label: "The Cast", text: a.Role ? `Featuring ${a.Name.trim()} as ${a.Role.trim()}.` : `Starring ${a.Name.trim()}.` });
+        });
+
+        item.Taglines?.forEach(t => out.push({ label: "The Concept", text: t }));
+
+        item.Overview?.split(/[.!?]/).map(s => s.trim()).filter(s => s.length > 45 && s.length < 250)
+            .slice(0, 3).forEach(s => out.push({ label: "The Narrative", text: s + '.' }));
+
+        const fetchTasks = [];
+
+        fetchTasks.push((async () => {
+            try {
+                const clean = item.Name.replace(/\s*\(.*?\)\s*/g, '').replace(/[:\-]/g, ' ').replace(/\s+/g, ' ').trim();
+                const searchTerms = encodeURIComponent(`${clean} ${item.ProductionYear || ''} film`.trim());
+                
+                const searchRes = await fetchWithTimeout(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerms}&utf8=&format=json&origin=*`, 2500);
+                if (searchRes?.ok) {
+                    const searchData = await searchRes.json();
+                    const bestHit = searchData?.query?.search?.[0]?.title;
+                    
+                    if (bestHit) {
+                        const summaryRes = await fetchWithTimeout(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(bestHit.replace(/ /g, '_'))}`, 2500);
+                        if (summaryRes?.ok) {
+                            const d = await summaryRes.json();
+                            if (d.extract?.length > 50) { 
+                                out.push({ label: "The History", text: d.extract }); 
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Insight Mod Fetch Error:', e);
+            }
+        })());
+
+        actors.forEach(a => {
+            if (!a.Name) return;
+            fetchTasks.push((async () => {
+                try {
+                    const searchRes = await fetchWithTimeout(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(a.Name)}&utf8=&format=json&origin=*`, 2500);
+                    if (searchRes?.ok) {
+                        const searchData = await searchRes.json();
+                        const bestHit = searchData?.query?.search?.[0]?.title;
+                        
+                        if (bestHit && bestHit.toLowerCase().includes(a.Name.split(' ')[0].toLowerCase())) {
+                            const summaryRes = await fetchWithTimeout(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(bestHit.replace(/ /g, '_'))}`, 2500);
+                            if (summaryRes?.ok) {
+                                const d = await summaryRes.json();
+                                if (d.extract?.length > 50) {
+                                    let text = d.extract;
+                                    const sentences = text.match(/[^.!?]+[.!?]+/g);
+                                    if (sentences && sentences.length > 1) {
+                                        text = sentences.slice(0, 2).join(' ').trim();
+                                    }
+                                    out.push({ label: `Actor Insight: ${a.Name}`, text: text });
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error('Insight Mod Actor Fetch Error:', e);
+                }
+            })());
+        });
+
+        await Promise.all(fetchTasks);
+
+        if (!out.length) out.push({ label: "The Journey", text: "No specific insights gathered." });
+
+        const seen = new Set();
+        const uniqueOut = out.filter(e => { const k = e.text.toLowerCase(); return seen.has(k) ? false : seen.add(k); });
+        
+        for (let i = uniqueOut.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [uniqueOut[i], uniqueOut[j]] = [uniqueOut[j], uniqueOut[i]];
+        }
+
+        return uniqueOut;
+    };
+
+    const fade = (el, content, isText = false) => {
+        if (!el) return;
+        el.style.cssText += ';transition:none;opacity:0';
+        setTimeout(() => { el[isText ? 'innerHTML' : 'textContent'] = content; el.style.transition = ''; }, 50);
+    };
+
+    const createOverlay = () => {
+        let div = $('jf-insight-overlay');
+        
+        if (div && !document.body.contains(div)) {
+            document.body.appendChild(div);
+        } else if (!div) {
+            div = document.createElement('div');
+            div.id = 'jf-insight-overlay';
+            div.innerHTML = `<div class="insight-content"><div class="insight-header-row"><span class="insight-label"></span></div><div class="insight-text"></div><div class="insight-footer"><div class="insight-nav" id="jf-next-insight">Next Insight</div><div class="insight-nav" id="jf-close-insight">Dismiss</div></div></div>`;
+            document.body.appendChild(div);
+            $('jf-next-insight').addEventListener('click', e => { e.stopPropagation(); displayNext(); });
+            $('jf-close-insight').addEventListener('click', e => { e.stopPropagation(); toggleUI(true); });
+        }
+        
+        _overlay = div;
+        _text = div.querySelector('.insight-text');
+        _label = div.querySelector('.insight-label');
+    };
+
+    const toggleUI = (close = false) => {
+        try {
+            createOverlay();
+            const btn = $('jf-vision-trigger');
+            const closing = close || visible;
+            
+            if (closing) {
+                _overlay.classList.remove('active');
+                if (btn) btn.classList.remove('active-mode');
+                visible = false;
+                if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+                fade(_text, ''); fade(_label, '');
+            } else {
+                _overlay.classList.add('active');
+                if (btn) btn.classList.add('active-mode');
+                visible = true;
+                if (_text) { _text.style.opacity = 0; _text.innerHTML = ''; }
+                if (_label) { _label.style.opacity = 0; _label.textContent = ''; }
+                rafId = requestAnimationFrame(updatePosition);
+                displayNext();
+            }
+        } catch (e) {
+            console.error('Insight Mod UI Error:', e);
+        }
+    };
+
+    const displayNext = () => {
+        try {
+            if (!_overlay || !_text || !_label) return;
+            if (!trivia.length) {
+                _label.textContent = 'The Concept'; _text.innerHTML = 'Gathering narratives...';
+                _label.style.opacity = _text.style.opacity = 1;
+                return;
+            }
+            idx = (idx + 1) % trivia.length;
+            const e = trivia[idx];
+            _text.style.transition = _label.style.transition = 'none';
+            _text.style.opacity = _label.style.opacity = 0;
+            void _text.offsetHeight;
+            setTimeout(() => {
+                _text.style.transition = _label.style.transition = '';
+                _label.textContent = e.label || 'The Concept';
+                _text.innerHTML = `"${e.text}"`;
+                _text.style.opacity = _label.style.opacity = 1;
+            }, 50);
+        } catch (e) {
+            console.error('Insight Mod Display Error:', e);
+        }
+    };
+
+    const isPlayerActive = () => {
+        const osd = $('videoOsdPage');
+        return !!qs('video') && (!!qs('.videoPlayerContainer') || (osd && !osd.classList.contains('hide')));
+    };
+
+    const sync = async () => {
+        if (teardown) return;
+        try {
+            if (!isPlayerActive()) {
+                if (visible) toggleUI(true);
+                activeItem = null;
+                const b = $('jf-vision-trigger');
+                if (b) b.style.display = 'none';
+                teardown = true;
+                setTimeout(() => { teardown = false; }, 500);
+                return;
+            }
+
+            if (typeof ApiClient === 'undefined') return;
+            createOverlay();
+
+            const headerLeft = qs('.headerLeft'), pageTitle = qs('.pageTitle');
+            let btn = $('jf-vision-trigger');
+            if (headerLeft && pageTitle) {
+                if (!btn) {
+                    btn = document.createElement('button');
+                    btn.id = 'jf-vision-trigger';
+                    btn.type = 'button';
+                    btn.innerHTML = '<span class="material-icons">visibility</span> VISION';
+                    btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); toggleUI(); });
+                    headerLeft.insertBefore(btn, pageTitle);
+                }
+                btn.style.display = 'inline-flex';
+                if (visible) btn.classList.add('active-mode'); 
+                else btn.classList.remove('active-mode');
+            }
+
+            let newId = window.location.hash.match(/[?&](?:id|itemId)=([a-zA-Z0-9-]+)/i)?.[1];
+            if (!newId) {
+                newId = qs('.btnUserRating[data-id]')?.getAttribute('data-id');
+            }
+            
+            if (newId && newId !== activeItem) {
+                activeItem = newId;
+                trivia = []; idx = -1;
+                try {
+                    const timeout = new Promise(res => setTimeout(() => res([]), 8000));
+                    const item = await ApiClient.getJSON(ApiClient.getUrl(`Users/${ApiClient.getCurrentUserId()}/Items/${activeItem}`));
+                    trivia = await Promise.race([fetchTrivia(item), timeout]);
+                    if (!trivia.length) trivia = [{ label: "The Journey", text: "No specific insights gathered." }];
+                    if (visible) displayNext();
+                } catch (e) { 
+                    activeItem = null; 
+                    console.error('Insight Mod Item Fetch Error:', e);
+                }
+            }
+        } catch (e) {
+            console.error('Insight Mod Sync Error:', e);
+        }
+    };
+
+    injectStyles();
+    setInterval(sync, 1000);
+    window.addEventListener('hashchange', sync);
+    window.addEventListener('popstate', sync);
+
+})();
