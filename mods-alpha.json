@@ -1,19 +1,29 @@
 [
   {
-  "id": "hot-library",
-  "name": "Hot Library Heatmap",
-  "author": "yourname",
-  "description": "Posters emit a thermal glow based on your watch history (Red = 5+ plays, Yellow = 1+ plays, Blue = Unplayed).",
-  "version": "1.0.0",
-  "jellyfin": "10.11+",
-  "tags": ["ui", "server"],
-  "previewUrl": "",
-  "sourceUrl": "",
-  "cssUrl": null,
-  "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/hot-library-client.js",
-  "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/hot-library-server.js",
-  "permissions": ["jellyfin.read"],
-  "requires": [],
-  "vars": []
-}
+    "id": "jelly-rpg",
+    "name": "Jelly RPG",
+    "author": "grimmdev",
+    "description": "Manual stat allocation and dynamic Realm assignments based on watched genres.",
+    "version": "5.0.0",
+    "jellyfin": "10.10+",
+    "tags": ["ui", "server", "gamification", "rpg"],
+    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-rpg-client.js",
+    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-rpg-server.js",
+    "permissions": ["jellyfin.read", "store"],
+    "vars": [
+      {
+        "key": "XP_COLOR",
+        "name": "Theme Color",
+        "type": "color",
+        "default": "#8a2be2",
+        "allowGradient": true
+      },
+      {
+        "key": "LEVEL_UP_COLOR",
+        "name": "Level Up Flash Color",
+        "type": "color",
+        "default": "#ffd700"
+      }
+    ]
+  }
 ]
