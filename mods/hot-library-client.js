@@ -1,6 +1,6 @@
-(function() {
+(function () {
     var MOD_ID = 'hot-library';
-    var API    = '/JellyFrame/mods/' + MOD_ID + '/api';
+    var API = '/JellyFrame/mods/' + MOD_ID + '/api';
 
     var currentUserId = null;
     var queue = [];
@@ -14,7 +14,7 @@
     };
 
     function boot() {
-        resolveUser(function() {
+        resolveUser(function () {
             injectStyles();
             startObserver();
             scanCards();
@@ -27,19 +27,19 @@
                 try {
                     var p = ApiClient.getCurrentUser();
                     if (p && typeof p.then === 'function') {
-                        p.then(function(u) {
+                        p.then(function (u) {
                             if (u && u.Id) { currentUserId = u.Id; }
                             cb();
-                        }).catch(function() { cb(); });
+                        }).catch(function () { cb(); });
                         return;
                     }
                     if (p && p.Id) { currentUserId = p.Id; }
                     cb();
                     return;
-                } catch(e) {}
+                } catch (e) { }
             }
             if (tries > 0) {
-                setTimeout(function() { attempt(tries - 1); }, 400);
+                setTimeout(function () { attempt(tries - 1); }, 400);
             } else {
                 cb();
             }
@@ -49,7 +49,7 @@
 
     function injectStyles() {
         if (document.getElementById('jf-hot-library-styles')) { return; }
-        
+
         var css = [
             '.cardScalable { position: relative; }',
             '.cardScalable::after {',
@@ -86,7 +86,7 @@
             '  animation: pulseCold 4s ease-in-out infinite;',
             '}'
         ].join('\n');
-        
+
         var s = document.createElement('style');
         s.id = 'jf-hot-library-styles';
         s.textContent = css;
@@ -103,16 +103,16 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ids: batch, userId: currentUserId })
         })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            if (data && data.heat) {
-                for (var id in data.heat) {
-                    cache[id] = data.heat[id];
-                    applyHeat(id, data.heat[id]);
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                if (data && data.heat) {
+                    for (var id in data.heat) {
+                        cache[id] = data.heat[id];
+                        applyHeat(id, data.heat[id]);
+                    }
                 }
-            }
-        })
-        .catch(function(e) { console.error('Heat fetch error', e); });
+            })
+            .catch(function (e) { console.error('Heat fetch error', e); });
     }
 
     function queueCard(id) {
@@ -131,9 +131,9 @@
         var cards = document.querySelectorAll('.card[data-id="' + id + '"], .itemCard[data-id="' + id + '"]');
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
-            
+
             card.classList.remove('jf-heat-scorch', 'jf-heat-warm', 'jf-heat-cold');
-            
+
             if (playCount >= 5) {
                 card.classList.add('jf-heat-scorch');
             } else if (playCount >= 1) {
@@ -141,7 +141,7 @@
             } else {
                 card.classList.add('jf-heat-cold');
             }
-            
+
             card.setAttribute('data-heat-applied', '1');
             card.removeAttribute('data-heat-queued');
         }
@@ -149,22 +149,22 @@
 
     function scanCards() {
         var cards = document.querySelectorAll('.card:not([data-heat-queued]):not([data-heat-applied]), .itemCard:not([data-heat-queued]):not([data-heat-applied])');
-        
+
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
             var type = card.getAttribute('data-type') || '';
-            
+
             if (SKIP_TYPES[type]) {
                 card.setAttribute('data-heat-applied', 'skip');
                 continue;
             }
-            
+
             var id = card.getAttribute('data-id');
             if (!id) {
                 var inner = card.querySelector('[data-id]');
                 if (inner) id = inner.getAttribute('data-id');
             }
-            
+
             if (id && id !== 'undefined') {
                 card.setAttribute('data-heat-queued', '1');
                 queueCard(id);
@@ -175,7 +175,7 @@
     }
 
     function startObserver() {
-        var mo = new MutationObserver(function(mutations) {
+        var mo = new MutationObserver(function (mutations) {
             var shouldScan = false;
             for (var i = 0; i < mutations.length; i++) {
                 var added = mutations[i].addedNodes;
