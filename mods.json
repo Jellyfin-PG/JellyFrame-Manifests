@@ -308,7 +308,7 @@
     "name": "Vision (X-ray alt)",
     "author": "grimmdev",
     "description": "An alternative to amazon's X-ray feature, presents information from wikipedia.",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "jellyfin": "10.11+",
     "tags": [
       "ui",
@@ -319,7 +319,7 @@
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/Vision/thumbnail.png",
     "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/Vision",
     "cssUrl": "",
-    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/Vision/Vision.min.js",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/vision-client.v2.js",
     "serverJs": "",
     "permissions": [
       "jellyfin.read"
