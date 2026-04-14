@@ -76,7 +76,7 @@
 
             '.rpg-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; font-family: monospace; } ' +
             '.rpg-modal.active { opacity: 1; pointer-events: auto; } ' +
-            '.rpg-sheet { background-color: #111; background-position: center; background-repeat: repeat; width: 500px; border-radius: 8px; padding: 1.5rem; border: 2px solid {{XP_COLOR}}; box-shadow: 0 0 30px rgba(0,0,0,0.7); position: relative; transform: scale(0.95); transition: transform 0.2s; color: #fff; display: flex; flex-direction: column; max-height: 85vh; overflow: hidden; } ' +
+            '.rpg-sheet { background-color: var(--lighterGradientPoint, #111); background-position: center; background-repeat: repeat; width: 500px; border-radius: 8px; padding: 1.5rem; border: 2px solid {{XP_COLOR}}; box-shadow: 0 0 30px rgba(0,0,0,0.7); position: relative; transform: scale(0.95); transition: transform 0.2s; color: #fff; display: flex; flex-direction: column; max-height: 85vh; overflow: hidden; } ' +
             '.rpg-modal.active .rpg-sheet { transform: scale(1); } ' +
             '.rpg-close { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #666; cursor: pointer; padding: 5px; z-index: 10; } ' +
             '.rpg-close:hover { color: {{XP_COLOR}}; } ' +
