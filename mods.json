@@ -1,5 +1,18 @@
 [
   {
+    "id": "audio-studio",
+    "name": "Audio Studio",
+    "author": "grimmdev",
+    "description": "Feature complete audio studio for videos, EQ, custom EQ, volume booster.",
+    "version": "1.0.0",
+    "jellyfin": "10.10+",
+    "tags": ["ui", "videos"],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/audio-studio.png",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/audio-studio-client.min.js",
+    "permissions": [],
+    "vars": []
+  },
+  {
     "id": "screensaver",
     "name": "Screensaver",
     "author": "grimmdev",
