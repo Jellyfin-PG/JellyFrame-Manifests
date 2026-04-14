@@ -453,7 +453,7 @@
     "name": "Video Tuner",
     "author": "grimmdev",
     "description": "Adds brightness, contrast, saturation, sharpness and denoise controls to the Jellyfin video player.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "jellyfin": "10.11+",
     "tags": [
       "player",
@@ -462,7 +462,7 @@
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/VideoTuner/thumbnail.png",
     "sourceUrl": "https://github.com/Jellyfin-PG/Custom-Mods/tree/main/VideoTuner",
     "cssUrl": "",
-    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Custom-Mods@main/VideoTuner/VideoTuner.min.js",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/video-tuner-client.min.js",
     "serverJs": "",
     "permissions": [],
     "requires": [],
