@@ -908,7 +908,7 @@
   },
   {
     "id": "my-pet-homepage",
-    "name": "My Pet Homepage",
+    "name": "My Pet App Homepage",
     "author": "Grimmdev",
     "description": "A homepage app that adds a pet to take care of.",
     "version": "1.0.0",
@@ -921,6 +921,48 @@
     "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
     "cssUrl": "",
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/my-pet.min.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": ["home-app-layout"],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "server-health-card-homepage",
+    "name": "Server Health App Homepage",
+    "author": "Grimmdev",
+    "description": "A homepage app that adds server health.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "homepage"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/server-health-card.png",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/server-health-card-client.js",
+    "serverJs": "",
+    "permissions": [],
+    "requires": ["home-app-layout"],
+    "preconnect": [],
+    "vars": []
+  },
+  {
+    "id": "flip-coin-card-homepage",
+    "name": "Coin Flip App Homepage",
+    "author": "Grimmdev",
+    "description": "A homepage app that adds fun.",
+    "version": "1.0.0",
+    "jellyfin": "10.11+",
+    "tags": [
+      "ui",
+      "homepage"
+    ],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/flip-coin-card.png",
+    "sourceUrl": "https://jellyfin-pg.github.io/JellyFrame/",
+    "cssUrl": "",
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/flip-coin-card-client.js",
     "serverJs": "",
     "permissions": [],
     "requires": ["home-app-layout"],
