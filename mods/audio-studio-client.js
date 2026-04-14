@@ -1,4 +1,3 @@
-// Jellyfin Audio Booster & EQ Mod
 // Amplifies audio up to 300% and provides a 10-band Equalizer.
 // Strictly ES5 compliant. Works on local browser playback only.
 
@@ -35,10 +34,6 @@
         var s = document.createElement('style');
         s.id = 'jf-booster-css';
         s.innerHTML = 
-            '.jf-boost-btn { color: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; transition: background 0.2s; background: transparent; border: none; padding: 0; } ' +
-            '.jf-boost-btn:hover { background: rgba(255,255,255,0.1); } ' +
-            '.jf-boost-btn .material-icons { font-size: 24px; pointer-events: none; } ' +
-            
             '#jf-boost-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 999999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; font-family: sans-serif; } ' +
             '#jf-boost-modal.active { opacity: 1; pointer-events: auto; } ' +
             '.jf-boost-card { background: var(--theme-background, #1a1a1a); padding: 25px; border-radius: 12px; width: 480px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.8); color: #fff; transform: scale(0.9); transition: transform 0.2s; } ' +
@@ -211,36 +206,71 @@
     }
 
     function monitorPlayer() {
-        var video = document.querySelector('video');
-        var settingsBtn = document.querySelector('.btnVideoOsdSettings');
-        var container = document.querySelector('.buttons.focuscontainer-x');
-        
-        if (!video || !settingsBtn || !container) return;
+        var isVideoPage = window.location.hash.indexOf('video') !== -1;
+        var existingBtn = document.getElementById('jf-boost-btn-wrap');
+
+        if (!isVideoPage) {
+            if (existingBtn && existingBtn.parentNode) existingBtn.parentNode.removeChild(existingBtn);
+            var modal = document.getElementById('jf-boost-modal');
+            if (modal) modal.classList.remove('active');
+            return;
+        }
+
+        var video = document.querySelector('video') || document.querySelector('.htmlvideoplayer');
+        if (!video) return;
 
         initAudio(video);
         injectModal();
 
-        if (!document.getElementById('jf-boost-btn-wrap')) {
+        if (existingBtn) return;
+
+        var osdContainers = document.querySelectorAll('.buttons.focuscontainer-x');
+        
+        for (var i = 0; i < osdContainers.length; i++) {
+            var container = osdContainers[i];
+            if (container.querySelector('#jf-boost-btn-wrap')) continue;
+
             var btn = document.createElement('button');
             btn.id = 'jf-boost-btn-wrap';
-            btn.type = 'button';
-            btn.className = 'jf-boost-btn paper-icon-button-light';
+            btn.setAttribute('is', 'paper-icon-button-light');
+            btn.className = 'paper-icon-button-light btnAudioBooster autoSize paper-icon-button-light';
             btn.title = 'Audio Booster & EQ';
-            btn.innerHTML = '<span class="material-icons">graphic_eq</span>';
+            btn.innerHTML = '<span class="largePaperIconButton material-icons graphic_eq" aria-hidden="true"></span>';
             
-            if (settingsBtn.parentNode) {
-                settingsBtn.parentNode.insertBefore(btn, settingsBtn);
-                btn.addEventListener('click', function() {
-                    updateUI();
-                    document.getElementById('jf-boost-modal').classList.add('active');
-                });
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                updateUI();
+                document.getElementById('jf-boost-modal').classList.add('active');
+            };
+
+            var settingsBtn = container.querySelector('.btnVideoOsdSettings');
+            if (settingsBtn) {
+                container.insertBefore(btn, settingsBtn);
+            } else {
+                container.appendChild(btn);
             }
         }
     }
 
-    injectStyles();
-    setInterval(monitorPlayer, 1000);
+    function start() {
+        injectStyles();
+        
+        var observer = new MutationObserver(function() {
+            monitorPlayer();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        monitorPlayer();
+    }
+
     window.addEventListener('click', function() {
         if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
     }, { once: true });
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+    } else {
+        start();
+    }
 })();
