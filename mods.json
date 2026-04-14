@@ -50,7 +50,8 @@
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-client.v2.js",
     "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-server.v2.js",
     "permissions": [
-      "jellyfin.read", 
+      "jellyfin.read",
+      "jellyfin.write",
       "store", 
       "scheduler"
     ],
