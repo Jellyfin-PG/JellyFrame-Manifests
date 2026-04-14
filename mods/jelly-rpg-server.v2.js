@@ -1,13 +1,17 @@
 // Runs inside Jellyfin via Jint 4.1.0
-// Features: Quests, Tiered Achievements, Prestige, and Stat Allocation.
+// Features: Quests, Tiered Achievements, Prestige, Stat Allocation, and Leaderboards (Realm War).
 
-jf.onStart(function() {
+jf.onStart(function () {
     jf.log.info('Jelly RPG Extended Engine Started');
     jf.jellyfin.on('playback.stopped', handlePlaybackStopped);
+
+    buildLeaderboard();
+    jf.scheduler.interval(30 * 60 * 1000, buildLeaderboard);
 });
 
-jf.onStop(function() {
+jf.onStop(function () {
     jf.jellyfin.off('playback.stopped');
+    jf.scheduler.cancelAll();
 });
 
 var ACHIEVEMENTS = [
@@ -18,7 +22,7 @@ var ACHIEVEMENTS = [
     { id: 'm250', type: 'movies', req: 250, title: '🎥 Film Critic (250 Movies)', xp: 10000 },
     { id: 'm500', type: 'movies', req: 500, title: '👑 Supreme Cinephile (500 Movies)', xp: 25000 },
     { id: 'm1000', type: 'movies', req: 1000, title: '🌟 Cinematic Legend (1,000 Movies)', xp: 75000 },
-    
+
     // Episodes
     { id: 'e25', type: 'episodes', req: 25, title: '📺 Casual Binger (25 Episodes)', xp: 500 },
     { id: 'e100', type: 'episodes', req: 100, title: '🛋️ Season Veteran (100 Episodes)', xp: 1500 },
@@ -27,7 +31,7 @@ var ACHIEVEMENTS = [
     { id: 'e2500', type: 'episodes', req: 2500, title: '🌌 Infinite Watcher (2,500 Episodes)', xp: 30000 },
     { id: 'e5000', type: 'episodes', req: 5000, title: '⏳ Master of Time (5,000 Episodes)', xp: 60000 },
     { id: 'e10000', type: 'episodes', req: 10000, title: '♾️ The Eternal Viewer (10,000 Episodes)', xp: 150000 },
-    
+
     // Quests Completed (New Tracker)
     { id: 'q10', type: 'quests', req: 10, title: '📜 Bounty Hunter (10 Quests)', xp: 1000 },
     { id: 'q50', type: 'quests', req: 50, title: '🗡️ Mercenary (50 Quests)', xp: 4000 },
@@ -111,11 +115,21 @@ function getDominantRealm(scores) {
     return maxRealm;
 }
 
+function getRealmMultiplier(realmName) {
+    var lb = jf.cache.get('rpg_leaderboard');
+    if (!lb || !lb.realms || lb.realms.length === 0) return 1.0;
+    var realms = lb.realms;
+    if (realms.length > 0 && realms[0].name === realmName) return 1.15;
+    if (realms.length > 1 && realms[1].name === realmName) return 1.10;
+    if (realms.length > 2 && realms[2].name === realmName) return 1.05;
+    return 1.0;
+}
+
 function getOrCreateProfile(userId) {
     var str = jf.userStore.get(userId, 'rpg_char');
     if (str) return JSON.parse(str);
 
-    var newProf = { 
+    var newProf = {
         xp: 0, prestige: 0,
         stats: { str: 0, int: 0, cha: 0, dex: 0, wis: 0, con: 0 },
         availablePoints: 0,
@@ -134,11 +148,11 @@ function ensureQuests(profile) {
     var today = new Date().toISOString().split('T')[0];
     if (!profile.quests || profile.quests.date !== today) {
         profile.quests = { date: today, tasks: [] };
-        
+
         var configQuestCount = parseInt(jf.vars['DAILY_QUEST_COUNT'] || '3', 10);
         if (configQuestCount < 1) configQuestCount = 1;
         if (configQuestCount > 6) configQuestCount = 6;
-        
+
         var pool = [
             { id: 'q1', desc: 'Feature Presentation (1 Movie)', type: 'Movie', goal: 1, progress: 0, xp: 250, done: false },
             { id: 'q2', desc: 'Double Feature (2 Movies)', type: 'Movie', goal: 2, progress: 0, xp: 600, done: false },
@@ -164,13 +178,13 @@ function ensureQuests(profile) {
             { id: 'q22', desc: 'Date Night (1 Romance)', type: 'genre', target: 'Romance', fallback: 'Romance', goal: 1, progress: 0, xp: 250, done: false },
             { id: 'q23', desc: 'Family Time (1 Kids/Family)', type: 'genre', target: 'Family', fallback: 'Kids', goal: 1, progress: 0, xp: 200, done: false }
         ];
-        
+
         var selected = [];
         for (var i = 0; i < configQuestCount; i++) {
             if (pool.length === 0) break;
             var idx = Math.floor(Math.random() * pool.length);
             selected.push(pool[idx]);
-            pool.splice(idx, 1); 
+            pool.splice(idx, 1);
         }
         profile.quests.tasks = selected;
         return true;
@@ -180,9 +194,10 @@ function ensureQuests(profile) {
 
 function processQuests(profile, item) {
     ensureQuests(profile);
+    var earnedQuestXP = 0;
     var notifications = [];
     var genresStr = item.genres ? item.genres.join(', ') : '';
-    
+
     if (typeof profile.history.questsDone === 'undefined') {
         profile.history.questsDone = 0;
     }
@@ -203,7 +218,7 @@ function processQuests(profile, item) {
             q.done = true;
             earnedQuestXP += q.xp;
             profile.history.questsDone++;
-            notifications.push("🎯 Bounty Complete: " + q.desc);
+            notifications.push("🎯 Bounty Complete: " + q.desc + " (+" + q.xp + " XP)");
         }
     }
     return { xp: earnedQuestXP, notifications: notifications };
@@ -218,7 +233,7 @@ function processAchievements(profile) {
         var a = ACHIEVEMENTS[i];
         if (profile.unlockedAchievements.indexOf(a.id) === -1) {
             var unlocked = false;
-            
+
             if (a.type === 'movies' && profile.history.movies >= a.req) unlocked = true;
             else if (a.type === 'episodes' && profile.history.episodes >= a.req) unlocked = true;
             else if (a.type === 'quests' && (profile.history.questsDone || 0) >= a.req) unlocked = true;
@@ -232,7 +247,7 @@ function processAchievements(profile) {
             if (unlocked) {
                 profile.unlockedAchievements.push(a.id);
                 earnedXP += a.xp;
-                notifications.push("🏅 " + a.title);
+                notifications.push("🏅 " + a.title + " (+" + a.xp + " XP)");
             }
         }
     }
@@ -244,21 +259,23 @@ function handlePlaybackStopped(data) {
         if (!data || !data.userId || !data.itemId) return;
         var userId = data.userId;
         var minutes = (data.positionTicks / 10000000) / 60;
-        if (!data.playedToEnd && minutes < 5) return; 
+        if (!data.playedToEnd && minutes < 5) return;
 
         var item = jf.jellyfin.getItem(data.itemId, userId);
         if (!item) return;
 
         var profile = getOrCreateProfile(userId);
-        
+
         var globalXpMult = parseFloat(jf.vars['GLOBAL_XP_MULTIPLIER'] || '1.0');
         var baseMovieXp = parseInt(jf.vars['BASE_XP_MOVIE'] || '150', 10);
         var baseEpXp = parseInt(jf.vars['BASE_XP_EPISODE'] || '50', 10);
         var baseOtherXp = 20;
 
+        var currentRealm = getDominantRealm(profile.realmScores);
+        var realmWarMult = getRealmMultiplier(currentRealm);
         var prestigeMult = 1.0 + ((profile.prestige || 0) * 0.10);
-        var totalMult = prestigeMult * globalXpMult;
-        
+        var totalMult = prestigeMult * globalXpMult * realmWarMult;
+
         var rawXP = (item.type === 'Movie') ? baseMovieXp : (item.type === 'Episode') ? baseEpXp : baseOtherXp;
         var earnedXP = Math.floor(rawXP * totalMult);
 
@@ -266,18 +283,18 @@ function handlePlaybackStopped(data) {
         if (item.type === 'Episode') profile.history.episodes++;
 
         var oldLvl = getLevelData(profile.xp).level;
-        
+
         var questRes = processQuests(profile, item);
         var achRes = processAchievements(profile);
-        
-        earnedXP += Math.floor(questRes.xp * globalXpMult);
-        earnedXP += Math.floor(achRes.xp * globalXpMult);
+
+        earnedXP += Math.floor(questRes.xp * globalXpMult * realmWarMult);
+        earnedXP += Math.floor(achRes.xp * globalXpMult * realmWarMult);
 
         profile.xp += earnedXP;
         var newLvlData = getLevelData(profile.xp);
-        
+
         if (item.genres) {
-            for(var g=0; g<item.genres.length; g++) {
+            for (var g = 0; g < item.genres.length; g++) {
                 var gn = item.genres[g].toLowerCase();
                 if (gn.indexOf('action') !== -1 || gn.indexOf('adventure') !== -1 || gn.indexOf('war') !== -1) profile.realmScores.iron++;
                 else if (gn.indexOf('sci-fi') !== -1 || gn.indexOf('documentary') !== -1 || gn.indexOf('mystery') !== -1) profile.realmScores.arcane++;
@@ -287,17 +304,16 @@ function handlePlaybackStopped(data) {
                 else if (gn.indexOf('animation') !== -1 || gn.indexOf('anime') !== -1 || gn.indexOf('family') !== -1) profile.realmScores.dream++;
             }
         }
-        
+
         var isLevelUp = false;
         if (newLvlData.level > oldLvl) {
             isLevelUp = true;
             profile.availablePoints += ((newLvlData.level - oldLvl) * 3);
         }
 
-        // Banner Unlocks based on Level
         if (!profile.unlockedBanners) profile.unlockedBanners = ['default'];
         if (!profile.equippedBanner) profile.equippedBanner = 'default';
-        
+
         if (newLvlData.level >= 25 && profile.unlockedBanners.indexOf('iron_hex') === -1) {
             profile.unlockedBanners.push('iron_hex');
         }
@@ -319,31 +335,121 @@ function handlePlaybackStopped(data) {
     } catch (e) { jf.log.error('RPG Engine Error: ' + e.message); }
 }
 
-jf.routes.get('/sheet', function(req, res) {
+function buildLeaderboard() {
+    try {
+        var users = jf.jellyfin.getUsers() || [];
+        var players = [];
+        var realmTotals = {
+            'Realm of Iron': 0,
+            'Arcane Academy': 0,
+            'Court of Hearts': 0,
+            'Grove of Whispers': 0,
+            'Shadowed Depths': 0,
+            'The Woven Dream': 0
+        };
+
+        for (var i = 0; i < users.length; i++) {
+            var u = users[i];
+            var str = jf.userStore.get(u.id, 'rpg_char');
+
+            if (str) {
+                var profile = JSON.parse(str);
+                var lvl = getLevelData(profile.xp);
+                var pClass = getPlayerClass(profile.stats);
+                var realm = getDominantRealm(profile.realmScores);
+
+                players.push({
+                    id: u.id,
+                    name: u.name,
+                    xp: profile.xp,
+                    level: lvl.level,
+                    prestige: profile.prestige || 0,
+                    pClass: pClass,
+                    realm: realm
+                });
+
+                if (realmTotals[realm] !== undefined) {
+                    realmTotals[realm] += profile.xp;
+                }
+            }
+        }
+
+        players.sort(function (a, b) {
+            if (b.prestige !== a.prestige) return b.prestige - a.prestige;
+            return b.xp - a.xp;
+        });
+
+        var realmsArr = [];
+        var totalRealmXP = 0;
+
+        for (var r in realmTotals) {
+            if (Object.prototype.hasOwnProperty.call(realmTotals, r)) {
+                realmsArr.push({ name: r, xp: realmTotals[r], pct: 0 });
+                totalRealmXP += realmTotals[r];
+            }
+        }
+
+        if (totalRealmXP > 0) {
+            for (var j = 0; j < realmsArr.length; j++) {
+                realmsArr[j].pct = (realmsArr[j].xp / totalRealmXP) * 100;
+            }
+        }
+
+        realmsArr.sort(function (a, b) { return b.xp - a.xp; });
+
+        var data = {
+            players: players.slice(0, 50),
+            realms: realmsArr,
+            totalRealmXP: totalRealmXP
+        };
+
+        jf.cache.set('rpg_leaderboard', data, 30 * 60 * 1000);
+        jf.log.info('RPG Leaderboard built successfully.');
+        return data;
+    } catch (e) {
+        jf.log.error('Leaderboard build error: ' + e.message);
+        return null;
+    }
+}
+
+jf.routes.get('/leaderboard', function (req, res) {
+    var data = jf.cache.get('rpg_leaderboard');
+    if (!data) {
+        data = buildLeaderboard();
+    }
+    return res.json(data || { players: [], realms: [], totalRealmXP: 0 });
+});
+
+jf.routes.get('/sheet', function (req, res) {
     var userId = req.query['userId'];
     if (!userId) return res.status(400).json({ error: 'userId required' });
 
     var profile = getOrCreateProfile(userId);
-    
+
     if (ensureQuests(profile)) {
         jf.userStore.set(userId, 'rpg_char', JSON.stringify(profile));
     }
-    
+
     var lvl = getLevelData(profile.xp);
-    
+
     var titles = [];
-    for(var i=0; i<(profile.unlockedAchievements||[]).length; i++) {
-        for(var j=0; j<ACHIEVEMENTS.length; j++) {
-            if(ACHIEVEMENTS[j].id === profile.unlockedAchievements[i]) titles.push(ACHIEVEMENTS[j].title);
+    for (var i = 0; i < (profile.unlockedAchievements || []).length; i++) {
+        for (var j = 0; j < ACHIEVEMENTS.length; j++) {
+            if (ACHIEVEMENTS[j].id === profile.unlockedAchievements[i]) titles.push(ACHIEVEMENTS[j].title);
         }
     }
 
+    var pClass = getPlayerClass(profile.stats);
+    var realm = getDominantRealm(profile.realmScores);
+    var realmMult = getRealmMultiplier(realm);
+
     return res.json({
         id: userId, level: lvl.level, progress: lvl.progress, xp: lvl.xp, nextXp: lvl.nextXp,
-        pClass: getPlayerClass(profile.stats),
-        realm: getDominantRealm(profile.realmScores),
+        pClass: pClass,
+        realm: realm,
+        realmMultiplier: realmMult,
         stats: profile.stats, availablePoints: profile.availablePoints, prestige: profile.prestige || 0,
-        quests: profile.quests, 
+        quests: profile.quests,
         achievements: titles,
         unlockedAchievements: profile.unlockedAchievements || [],
         history: profile.history || { movies: 0, episodes: 0, questsDone: 0 },
@@ -352,7 +458,7 @@ jf.routes.get('/sheet', function(req, res) {
     });
 });
 
-jf.routes.post('/allocate', function(req, res) {
+jf.routes.post('/allocate', function (req, res) {
     var userId = req.body ? String(req.body.userId) : null;
     var stat = req.body ? String(req.body.stat) : null;
     if (!userId || !stat || ['str', 'int', 'cha', 'dex', 'wis', 'con'].indexOf(stat) === -1) return res.status(400).json({ error: 'Invalid payload' });
@@ -369,7 +475,7 @@ jf.routes.post('/allocate', function(req, res) {
     return res.json({ ok: true });
 });
 
-jf.routes.post('/prestige', function(req, res) {
+jf.routes.post('/prestige', function (req, res) {
     var userId = req.body ? String(req.body.userId) : null;
     if (!userId) return res.status(400).json({ error: 'Missing userId' });
 
@@ -383,19 +489,19 @@ jf.routes.post('/prestige', function(req, res) {
     profile.stats = { str: 0, int: 0, cha: 0, dex: 0, wis: 0, con: 0 };
     profile.availablePoints = 0;
     profile.prestige = (profile.prestige || 0) + 1;
-    
+
     if (!profile.unlockedBanners) profile.unlockedBanners = ['default'];
     if (profile.prestige >= 1 && profile.unlockedBanners.indexOf('prestige_gold') === -1) profile.unlockedBanners.push('prestige_gold');
     if (profile.prestige >= 2 && profile.unlockedBanners.indexOf('obsidian_matrix') === -1) profile.unlockedBanners.push('obsidian_matrix');
-    
+
     jf.userStore.set(userId, 'rpg_char', JSON.stringify(profile));
     return res.json({ ok: true });
 });
 
-jf.routes.post('/equip_banner', function(req, res) {
+jf.routes.post('/equip_banner', function (req, res) {
     var userId = req.body ? String(req.body.userId) : null;
     var bannerId = req.body ? String(req.body.bannerId) : null;
-    
+
     if (!userId || !bannerId) return res.status(400).json({ error: 'Missing parameters' });
 
     var profileStr = jf.userStore.get(userId, 'rpg_char');
