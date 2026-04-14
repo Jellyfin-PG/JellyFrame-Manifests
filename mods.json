@@ -1,5 +1,30 @@
 [
   {
+    "id": "user-theme",
+    "name": "User Theme Selector",
+    "author": "grimmdev",
+    "description": "Allows individual users to override the server theme.",
+    "version": "1.0.0",
+    "jellyfin": "10.9+",
+    "tags": ["ui", "personalization", "themes"],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/user-theme.png",
+    "sourceUrl": "",
+    "cssUrl": null,
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/user-theme-client.js",
+    "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/user-theme-server.js",
+    "permissions": ["store", "http"],
+    "requires": [],
+    "vars": [
+      {
+        "key": "THEMES_URL",
+        "name": "Themes JSON URL",
+        "description": "URL to a valid themes.json catalog.",
+        "type": "text",
+        "default": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/themes.json"
+      }
+    ]
+  },
+  {
     "id": "audio-studio",
     "name": "Audio Studio",
     "author": "grimmdev",
