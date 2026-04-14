@@ -3,12 +3,12 @@
     "id": "jelly-rpg",
     "name": "Jelly RPG",
     "author": "grimmdev",
-    "description": "Manual stat allocation and dynamic Realm assignments based on watched genres.",
+    "description": "Massive RPG progression with customizable XP rates, 60+ achievements, and 30+ daily quests.",
     "version": "6.0.0",
     "jellyfin": "10.10+",
     "tags": ["ui", "server", "gamification", "rpg"],
-    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-rpg-client.js",
-    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-rpg-server.js",
+    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-rpg-client.v2.js",
+    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/jelly-rpg-server.v2.js",
     "permissions": ["jellyfin.read", "store"],
     "vars": [
       {
@@ -23,6 +23,32 @@
         "name": "Level Up Flash Color",
         "type": "color",
         "default": "#ffd700"
+      },
+      {
+        "key": "GLOBAL_XP_MULTIPLIER",
+        "name": "Global XP Multiplier",
+        "description": "Scale all XP gained globally (e.g., 1.5 for 50% more XP).",
+        "type": "text",
+        "default": "1.0"
+      },
+      {
+        "key": "BASE_XP_MOVIE",
+        "name": "Base XP (Movie)",
+        "type": "number",
+        "default": "150"
+      },
+      {
+        "key": "BASE_XP_EPISODE",
+        "name": "Base XP (Episode)",
+        "type": "number",
+        "default": "50"
+      },
+      {
+        "key": "DAILY_QUEST_COUNT",
+        "name": "Daily Quest Count",
+        "description": "How many quests a user receives each day.",
+        "type": "number",
+        "default": "3"
       }
     ]
   }
