@@ -1,26 +1,71 @@
 [
   {
-    "id": "user-theme",
-    "name": "User Theme Selector",
+    "id": "quick-queue",
+    "name": "Quick Queue",
     "author": "grimmdev",
-    "description": "Allows individual users to override the server theme and select their own from a curated list.",
+    "description": "Ephemeral watch queue with reorder, skip, clear, and cross-device sync.",
     "version": "1.0.0",
-    "jellyfin": "10.9+",
-    "tags": ["ui", "personalization", "themes"],
+    "jellyfin": "10.11+",
+    "tags": ["ui", "queue", "playback"],
     "previewUrl": "",
     "sourceUrl": "",
-    "cssUrl": null,
-    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/user-theme-client.js",
-    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/user-theme-server.js",
-    "permissions": ["store", "http"],
+    "cssUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/quick-queue-style.css",
+    "jsUrl": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/quick-queue-client.js",
+    "serverJs": "https://raw.githubusercontent.com/Jellyfin-PG/JellyFrame-Resources/refs/heads/main/mods/quick-queue-server.js",
+    "permissions": ["jellyfin.read", "jellyfin.write", "store", "jellyfin.admin"],
     "requires": [],
+    "preconnect": [],
     "vars": [
       {
-        "key": "THEMES_URL",
-        "name": "Themes JSON URL",
-        "description": "URL to a valid themes.json catalog.",
-        "type": "text",
-        "default": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/themes.json"
+        "key": "ACCENT_COLOR",
+        "name": "Queue Accent Color",
+        "description": "Color for queue UI elements",
+        "type": "color",
+        "default": "#00a4dc",
+        "allowGradient": false
+      },
+      {
+        "key": "AUTO_PLAY_NEXT",
+        "name": "Auto-Play Next",
+        "description": "Automatically start next queue item when current ends",
+        "type": "boolean",
+        "default": "true",
+        "trueValue": "1",
+        "falseValue": "0"
+      },
+      {
+        "key": "PERSIST_QUEUE",
+        "name": "Persist Queue",
+        "description": "Save queue across server restarts (uses userStore)",
+        "type": "boolean",
+        "default": "true",
+        "trueValue": "1",
+        "falseValue": "0"
+      },
+      {
+        "key": "PERSIST_TTL_HOURS",
+        "name": "Queue TTL (hours)",
+        "description": "Hours before persisted queue auto-clears (0 = never)",
+        "type": "number",
+        "default": "24"
+      },
+      {
+        "key": "SYNC_ACROSS_DEVICES",
+        "name": "Sync Across Devices",
+        "description": "Push queue updates to user's other active sessions",
+        "type": "boolean",
+        "default": "true",
+        "trueValue": "1",
+        "falseValue": "0"
+      },
+      {
+        "key": "SHOW_QUEUE_BUTTON",
+        "name": "Show Add-to-Queue Button",
+        "description": "Inject '+ Queue' button on item cards and detail pages",
+        "type": "boolean",
+        "default": "true",
+        "trueValue": "1",
+        "falseValue": "0"
       }
     ]
   }
