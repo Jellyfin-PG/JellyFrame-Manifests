@@ -17,7 +17,7 @@
     "name": "Jelly RPG",
     "author": "grimmdev",
     "description": "Turn your jellyfin into a role playing game.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "jellyfin": "10.10+",
     "tags": ["ui", "server", "gamification", "rpg"],
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg.png",
