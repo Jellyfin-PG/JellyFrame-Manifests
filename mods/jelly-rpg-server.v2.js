@@ -130,15 +130,14 @@ function getOrCreateProfile(userId) {
     return newProf;
 }
 
-function processQuests(profile, item) {
+function ensureQuests(profile) {
     var today = new Date().toISOString().split('T')[0];
-    
-    var configQuestCount = parseInt(jf.vars['DAILY_QUEST_COUNT'] || '3', 10);
-    if (configQuestCount < 1) configQuestCount = 1;
-    if (configQuestCount > 6) configQuestCount = 6;
-    
     if (!profile.quests || profile.quests.date !== today) {
         profile.quests = { date: today, tasks: [] };
+        
+        var configQuestCount = parseInt(jf.vars['DAILY_QUEST_COUNT'] || '3', 10);
+        if (configQuestCount < 1) configQuestCount = 1;
+        if (configQuestCount > 6) configQuestCount = 6;
         
         var pool = [
             { id: 'q1', desc: 'Feature Presentation (1 Movie)', type: 'Movie', goal: 1, progress: 0, xp: 250, done: false },
@@ -166,7 +165,6 @@ function processQuests(profile, item) {
             { id: 'q23', desc: 'Family Time (1 Kids/Family)', type: 'genre', target: 'Family', fallback: 'Kids', goal: 1, progress: 0, xp: 200, done: false }
         ];
         
-        // Randomly pull unique quests
         var selected = [];
         for (var i = 0; i < configQuestCount; i++) {
             if (pool.length === 0) break;
@@ -175,9 +173,13 @@ function processQuests(profile, item) {
             pool.splice(idx, 1); 
         }
         profile.quests.tasks = selected;
+        return true;
     }
+    return false;
+}
 
-    var earnedQuestXP = 0;
+function processQuests(profile, item) {
+    ensureQuests(profile);
     var notifications = [];
     var genresStr = item.genres ? item.genres.join(', ') : '';
     
@@ -292,6 +294,7 @@ function handlePlaybackStopped(data) {
             profile.availablePoints += ((newLvlData.level - oldLvl) * 3);
         }
 
+        // Banner Unlocks based on Level
         if (!profile.unlockedBanners) profile.unlockedBanners = ['default'];
         if (!profile.equippedBanner) profile.equippedBanner = 'default';
         
@@ -321,6 +324,11 @@ jf.routes.get('/sheet', function(req, res) {
     if (!userId) return res.status(400).json({ error: 'userId required' });
 
     var profile = getOrCreateProfile(userId);
+    
+    if (ensureQuests(profile)) {
+        jf.userStore.set(userId, 'rpg_char', JSON.stringify(profile));
+    }
+    
     var lvl = getLevelData(profile.xp);
     
     var titles = [];
@@ -335,7 +343,11 @@ jf.routes.get('/sheet', function(req, res) {
         pClass: getPlayerClass(profile.stats),
         realm: getDominantRealm(profile.realmScores),
         stats: profile.stats, availablePoints: profile.availablePoints, prestige: profile.prestige || 0,
-        quests: profile.quests, achievements: titles,
+        quests: profile.quests, 
+        achievements: titles,
+        unlockedAchievements: profile.unlockedAchievements || [],
+        history: profile.history || { movies: 0, episodes: 0, questsDone: 0 },
+        realmScores: profile.realmScores || {},
         unlockedBanners: profile.unlockedBanners || ['default'], equippedBanner: profile.equippedBanner || 'default'
     });
 });
