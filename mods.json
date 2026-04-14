@@ -3,29 +3,61 @@
     "id": "jelly-rpg",
     "name": "Jelly RPG",
     "author": "grimmdev",
-    "description": "Makes jellyfin a role playing game.",
-    "version": "1.0.0",
+    "description": "Turn your jellyfin into a role playing game.",
+    "version": "2.0.0",
     "jellyfin": "10.10+",
     "tags": ["ui", "server", "gamification", "rpg"],
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg.png",
-    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-client.js",
-    "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-server.js",
-    "permissions": ["jellyfin.read", "store", "shared-store"],
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-client.v2.js",
+    "serverJs": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jelly-rpg-server.v2.js",
+    "permissions": [
+      "jellyfin.read", 
+      "store", 
+      "scheduler"
+    ],
     "vars": [
       {
         "key": "XP_COLOR",
-        "name": "Primary Theme Color",
-        "description": "Color used for progress bars and UI highlights.",
+        "name": "Theme Color",
+        "description": "The primary color for progress bars, stats, and highlights.",
         "type": "color",
-        "default": "#00d0ff",
+        "default": "#8a2be2",
         "allowGradient": true
       },
       {
-        "key": "ENABLE_LEADERBOARD",
-        "name": "Publish to Leaderboard",
-        "description": "If enabled, users' levels are published to the global shared store.",
-        "type": "boolean",
-        "default": "true"
+        "key": "LEVEL_UP_COLOR",
+        "name": "Level Up Flash Color",
+        "description": "The color used for the massive LEVEL UP text on the screen.",
+        "type": "color",
+        "default": "#ffd700"
+      },
+      {
+        "key": "GLOBAL_XP_MULTIPLIER",
+        "name": "Global XP Multiplier",
+        "description": "Scale all XP gained globally (e.g., 1.5 for 50% more XP).",
+        "type": "text",
+        "default": "1.0"
+      },
+      {
+        "key": "BASE_XP_MOVIE",
+        "name": "Base XP (Movie)",
+        "description": "Base experience points rewarded for finishing a Movie.",
+        "type": "number",
+        "default": "150"
+      },
+      {
+        "key": "BASE_XP_EPISODE",
+        "name": "Base XP (Episode)",
+        "description": "Base experience points rewarded for finishing an Episode.",
+        "type": "number",
+        "default": "50"
+      },
+      {
+        "key": "DAILY_QUEST_COUNT",
+        "name": "Daily Quest Count",
+        "description": "How many bounties a user receives each day (1 to 6).",
+        "type": "number",
+        "default": "3"
       }
     ]
   },
