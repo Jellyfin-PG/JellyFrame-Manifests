@@ -1,23 +1,71 @@
-#jf-quick-queue-panel {
-    box-shadow: -2px 0 20px rgba(0,0,0,0.5);
+/* Quick Queue Mod - style.css */
+/* Uses {{VAR}} substitution from mods.json */
+
+#jf-qq-panel {
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
 }
 
 #jf-qq-list > div:hover {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.04);
 }
 
-.jf-qq-add-btn:hover {
+.jf-qq-play-item:hover {
+    opacity: 0.85;
+}
+
+.jf-qq-overlay-btn:hover .material-icons {
+    transform: scale(1.1);
+}
+
+.jf-qq-up:hover .material-icons,
+.jf-qq-down:hover .material-icons {
+    color: {{ACCENT_COLOR}} !important;
+    transform: scale(1.15);
+    transition: all 0.1s ease;
+}
+
+.jf-qq-remove:hover .material-icons {
+    color: #ef5350 !important;
+    transform: scale(1.15);
+    transition: all 0.1s ease;
+}
+
+#jf-qq-play-all:hover {
     opacity: 0.9;
-    transform: scale(1.05);
+    transform: scale(1.02);
+    transition: all 0.1s ease;
 }
 
-[data-jellyframe-mods] .jf-qq-highlight {
-    border-color: {{ACCENT_COLOR}} !important;
+#jf-qq-clear:hover {
+    background: #444 !important;
+    transition: background 0.1s ease;
+}
+
+#jf-qq-toggle:hover {
+    color: #f44336 !important;
+    transition: color 0.1s ease;
 }
 
 @media (max-width: 768px) {
-    #jf-quick-queue-panel {
+    #jf-qq-panel {
         width: 100%;
         max-width: 100%;
+        border-left: none;
+        border-top: 1px solid #333;
     }
+}
+
+#jf-qq-list::-webkit-scrollbar {
+    width: 6px;
+}
+#jf-qq-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+#jf-qq-list::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 3px;
+}
+#jf-qq-list::-webkit-scrollbar-thumb:hover {
+    background: {{ACCENT_COLOR}};
 }
