@@ -223,12 +223,18 @@
     "description": "A sleek, elegant Jellyfin theme with a focus on clean typography and polished layouts.",
     "version": "1.0.0",
     "jellyfin": "10.10+",
+    "editorsChoice": true,
     "tags": [
       "dark",
       "elegant",
       "minimal"
     ],
-    "previewUrl": "https://github.com/lscambo13/ElegantFin/blob/main/Previews/previews-v25.08.02/optimized/desktop/1.%20Homepage.webp?raw=true",
+    "previewUrl": "https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Previews/previews-v25.08.02/optimized/desktop/1.%20Homepage.webp",
+    "screenshots": [
+      "https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Previews/previews-v25.08.02/optimized/desktop/11.%20TV%20Show%20Page.webp",
+      "https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Previews/previews-v25.08.02/optimized/desktop/12.%20Movie%20Details.webp",
+      "https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Previews/previews-v25.08.02/optimized/desktop/3.%20Sidebar.webp"
+    ],
     "sourceUrl": "https://github.com/lscambo13/ElegantFin",
     "cssUrl": "https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css",
     "preconnect": [
