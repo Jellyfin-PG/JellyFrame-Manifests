@@ -1,5 +1,22 @@
 [
   {
+    "id": "quick-queue",
+    "name": "Watch Queue",
+    "author": "grimmdev",
+    "description": "A personal watch queue. Add movies or episodes from any card or detail page, reorder them, and play in sequence or shuffle.",
+    "version": "1.0.0",
+    "jellyfin": "10.9+",
+    "tags": ["ui", "playback", "queue"],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/quick-queue.png",
+    "sourceUrl": "",
+    "cssUrl": null,
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/quick-queue-client.js",
+    "serverJs": null,
+    "permissions": [],
+    "requires": [],
+    "vars": []
+  },
+  {
     "id": "user-theme",
     "name": "User Theme Selector",
     "author": "grimmdev",
