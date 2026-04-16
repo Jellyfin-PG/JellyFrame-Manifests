@@ -36,6 +36,23 @@
     ]
   },
   {
+    "id": "meow",
+    "name": "Meow",
+    "author": "grimmdev",
+    "description": "After a recent meme, I decided to turn jellyfin into a cat, every word becomes meow, warning do not use without being familiar with navigation.",
+    "version": "1.0.0",
+    "jellyfin": "10.9+",
+    "tags": ["ui", "animals"],
+    "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/meow.png",
+    "sourceUrl": "",
+    "cssUrl": null,
+    "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/meow-client.js",
+    "serverJs": null,
+    "permissions": [],
+    "requires": [],
+    "vars": []
+  },
+  {
     "id": "quick-queue",
     "name": "Watch Queue",
     "author": "grimmdev",
