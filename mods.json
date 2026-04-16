@@ -11,6 +11,12 @@
       "personalization"
     ],
     "previewUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jellyfin-wallpaper.png",
+    "editorsChoice": true,
+    "screenshots": [
+      "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jellyfin-wallpaper.png",
+      "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jellyfin-wallpaper.png",
+      "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jellyfin-wallpaper.png"
+    ],
     "sourceUrl": "",
     "cssUrl": null,
     "jsUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame-Resources@main/mods/jellyfin-wallpaper-client.js",
